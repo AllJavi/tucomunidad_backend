@@ -19,8 +19,46 @@ public class UsuarioController {
 
     public UsuarioController() {
         this.usuarios = new ArrayList<>();
-        Usuario u1 = new Usuario("a", new String[]{"a", "b"}, "b", "c", "d", 0);
+        Usuario u1 = new Usuario(
+            "Pedro", 
+            new String[]{"Perez", "Garcia"}, 
+            "p.pgarcia@alumnos.upm.com",
+            "1234", 
+            "2A",
+            0);
         this.usuarios.add(u1);
+        Usuario u2 = new Usuario(
+            "Monica", 
+            new String[]{"Rodriguez", "Muñoz"}, 
+            "m.rmunoz@alumnos.upm.com",
+            "1234", 
+            "1A",
+            0);
+        this.usuarios.add(u2);
+        Usuario u3 = new Usuario(
+            "Carlos", 
+            new String[]{"De la Fuente", "Garcia"}, 
+            "c.fgarcia@alumnos.upm.com",
+            "1234", 
+            "1B",
+            0);
+        this.usuarios.add(u3);
+        Usuario u4 = new Usuario(
+            "Maria", 
+            new String[]{"Perez", "Lopez"}, 
+            "m.plopez@alumnos.upm.com",
+            "1234", 
+            "2B",
+            0);
+        this.usuarios.add(u4);
+        Usuario u5 = new Usuario(
+            "Marta", 
+            new String[]{"Sanchez", "Jones"}, 
+            "m.sjones@alumnos.upm.com",
+            "1234", 
+            "3",
+            0);
+        this.usuarios.add(u5);
     }
 
     private Usuario findByEmail(String email) {

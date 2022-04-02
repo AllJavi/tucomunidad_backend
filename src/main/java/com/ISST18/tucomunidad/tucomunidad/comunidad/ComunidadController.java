@@ -46,7 +46,7 @@ public class ComunidadController {
         return true;
     }
 
-    @PostMapping(path = "api/v1/comunidad/{comunityCode}/post")
+    @PostMapping(path = "api/v1/comunidad/{comunityCode}/votacion")
     public boolean newVotacion(@PathVariable String comunityCode, @RequestBody Votacion votacion) {
         Comunidad comunidad = findByComunityCode(comunityCode);
         comunidad.addVotacion(votacion);
