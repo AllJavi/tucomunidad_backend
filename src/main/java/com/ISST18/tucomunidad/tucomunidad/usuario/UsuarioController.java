@@ -33,7 +33,7 @@ public class UsuarioController {
             "m.rmunoz@alumnos.upm.com",
             "1234", 
             "1A",
-            0);
+            1);
         this.usuarios.add(u2);
         Usuario u3 = new Usuario(
             "Carlos", 
@@ -59,6 +59,9 @@ public class UsuarioController {
             "3",
             0);
         this.usuarios.add(u5);
+
+        for (int i = 0; i < this.usuarios.size(); i++)
+            this.usuarios.get(i).addComunidad("1957");
     }
 
     private Usuario findByEmail(String email) {

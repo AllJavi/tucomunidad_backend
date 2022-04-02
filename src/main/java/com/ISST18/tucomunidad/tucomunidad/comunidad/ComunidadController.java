@@ -2,10 +2,8 @@ package com.ISST18.tucomunidad.tucomunidad.comunidad;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +18,11 @@ public class ComunidadController {
 
     public ComunidadController() {
         this.comunidades = new ArrayList<>();
-        Comunidad c1 = new Comunidad("a", 16, "21234", "1234");
+        Comunidad c1 = new Comunidad(
+            "Av. Complutense", 
+            30, 
+            "28040", 
+            "1957");
         this.comunidades.add(c1);
         
     }
