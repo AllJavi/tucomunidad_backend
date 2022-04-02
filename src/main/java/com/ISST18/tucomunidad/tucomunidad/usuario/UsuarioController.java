@@ -1,5 +1,6 @@
 package com.ISST18.tucomunidad.tucomunidad.usuario;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -85,6 +86,7 @@ public class UsuarioController {
         return this.usuarios;
     }
     
+    @CrossOrigin
     @RequestMapping(path = "api/v1/usuario/login")
     @ResponseBody
     public Usuario login(@RequestParam String email, @RequestParam String password) {
