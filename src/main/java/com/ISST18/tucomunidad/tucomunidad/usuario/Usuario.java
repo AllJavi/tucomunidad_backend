@@ -23,7 +23,7 @@ public class Usuario {
         String piso, 
         int rol
     ) {
-        this.id = nextId;
+        this.id = nextId++;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
@@ -31,7 +31,6 @@ public class Usuario {
         this.piso = piso;
         this.rol = rol;
         this.comunidades = new ArrayList<>(); 
-        nextId++;
     }
 
     public Long getId() {

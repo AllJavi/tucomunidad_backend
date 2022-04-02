@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ISST18.tucomunidad.tucomunidad.post.Post;
 import com.ISST18.tucomunidad.tucomunidad.votacion.Votacion;
+import com.ISST18.tucomunidad.tucomunidad.instalaciones.Instalacion;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,27 @@ public class ComunidadController {
             30, 
             "28040", 
             "1957");
+
+        Instalacion piscina = new Instalacion(
+            "piscina",
+            800,
+            2000,
+            60,
+            0
+        );
+        c1.addInstalacion(piscina);
+
+        Instalacion padel = new Instalacion(
+            "padel",
+            1000,
+            2200,
+            30,
+            5
+        );
+        c1.addInstalacion(padel);
+
         this.comunidades.add(c1);
+        
         
     }
 

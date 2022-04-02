@@ -60,6 +60,15 @@ public class UsuarioController {
             0);
         this.usuarios.add(u5);
 
+        Usuario u6 = new Usuario(
+            "Alonso", 
+            new String[]{"Perez", "Rodriguez"}, 
+            "a.prodriguez@alumnos.upm.com",
+            "1234", 
+            "-1",
+            2);
+        this.usuarios.add(u6);
+
         for (int i = 0; i < this.usuarios.size(); i++)
             this.usuarios.get(i).addComunidad("1957");
     }
@@ -68,6 +77,12 @@ public class UsuarioController {
         for (Usuario user: this.usuarios) 
             if (user.getEmail().compareTo(email) == 0) return user;
         return null;
+    }
+
+    @RequestMapping(path = "api/v1/usuario")
+    @ResponseBody
+    public ArrayList<Usuario> showAll() {
+        return this.usuarios;
     }
     
     @RequestMapping(path = "api/v1/usuario/login")
@@ -86,20 +101,14 @@ public class UsuarioController {
         return true;
     }
 
-    // TODO: Repasar esta mierda de codigo
     @PutMapping(path = "api/v1/usuario/comunidad/{comunityCode}")
     public void addComunity(
         @PathVariable String comunityCode, 
         @RequestParam String email, 
         @RequestParam String password) {
-        for (int i = 0; i < this.usuarios.size(); i++) { 
-            Usuario user = this.usuarios.get(i);
-            if (user.getEmail().compareTo(email) == 0) {
-                if (user.getPassword().compareTo(password) == 0)
-                    this.usuarios.get(i).addComunidad(comunityCode);
-                break;
-            }
-        }
+        Usuario user = this.login(email, password);
+        if (Objects.nonNull(user))
+            user.addComunidad(comunityCode);
     }
 
 }

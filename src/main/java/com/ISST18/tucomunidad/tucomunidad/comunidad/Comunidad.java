@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.ISST18.tucomunidad.tucomunidad.post.Post;
 import com.ISST18.tucomunidad.tucomunidad.votacion.Votacion;
+import com.ISST18.tucomunidad.tucomunidad.instalaciones.Instalacion;
 
 public class Comunidad {
     static Long nextId = 0L;
@@ -15,6 +16,7 @@ public class Comunidad {
     private String comunityCode;
     private ArrayList<Post> posts;
     private ArrayList<Votacion> votaciones;
+    private ArrayList<Instalacion> instalaciones;
 
     public Comunidad(
         String calle, 
@@ -22,14 +24,14 @@ public class Comunidad {
         String cpostal,
         String comunityCode
     ) {
-        this.id = nextId;
+        this.id = nextId++;
         this.calle = calle;
         this.numero = numero;
         this.cpostal = cpostal;
         this.comunityCode = comunityCode;
         this.posts = new ArrayList<>();
         this.votaciones = new ArrayList<>();
-        nextId++;
+        this.instalaciones = new ArrayList<>();
     }
 
     public Long getId() {
@@ -95,4 +97,16 @@ public class Comunidad {
     public void addVotacion(Votacion votacion) {
         this.votaciones.add(votacion);
     } 
+
+    public ArrayList<Instalacion> getInstalaciones() {
+        return this.instalaciones;
+    }
+
+    public void setInstalaciones(ArrayList<Instalacion> instalaciones) {
+        this.instalaciones = instalaciones;
+    }
+
+    public void addInstalacion(Instalacion instalacion) {
+        this.instalaciones.add(instalacion);
+    }
 }

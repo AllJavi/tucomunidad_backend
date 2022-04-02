@@ -16,13 +16,11 @@ public class Post {
         String cuerpo,
         Usuario autor
     ) {
-        this.id = nextId;
+        this.id = nextId++;
         this.titulo = titulo;
         this.cuerpo = cuerpo;
         this.autor = autor;
         this.upvoted = 0;
-
-        nextId++;
     }
 
     public Long getId() {
