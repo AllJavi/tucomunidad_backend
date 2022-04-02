@@ -2,22 +2,34 @@ package com.ISST18.tucomunidad.tucomunidad.comunidad;
 
 import java.util.ArrayList;
 
+import com.ISST18.tucomunidad.tucomunidad.post.Post;
+import com.ISST18.tucomunidad.tucomunidad.votacion.Votacion;
+
 public class Comunidad {
+    static Long nextId = 0L;
+
     private Long id;
     private String calle;
-    private ArrayList<Integer> numero;
+    private int numero;
     private String cpostal;
+    private String comunityCode;
+    private ArrayList<Post> posts;
+    private ArrayList<Votacion> votaciones;
 
     public Comunidad(
-        Long id,
         String calle, 
-        ArrayList<Integer> numero,
-        String cpostal
+        int numero,
+        String cpostal,
+        String comunityCode
     ) {
-        this.id = id;
+        this.id = nextId;
         this.calle = calle;
         this.numero = numero;
         this.cpostal = cpostal;
+        this.comunityCode = comunityCode;
+        this.posts = new ArrayList<>();
+        this.votaciones = new ArrayList<>();
+        nextId++;
     }
 
     public Long getId() {
@@ -36,11 +48,11 @@ public class Comunidad {
         this.calle = calle;
     }
 
-    public ArrayList<Integer> getNumero() {
+    public int getNumero() {
         return this.numero;
     }
 
-    public void setNumero(ArrayList<Integer> numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
@@ -50,5 +62,37 @@ public class Comunidad {
 
     public void setCPostal(String cpostal) {
         this.cpostal = cpostal;
+    } 
+
+    public String getComunityCode() {
+        return this.comunityCode;
+    }
+
+    public void setComunityCode(String comunityCode) {
+        this.comunityCode = comunityCode;
+    } 
+
+    public ArrayList<Post> getPosts() {
+        return this.posts;
+    }
+
+    public void setPosts(ArrayList<Post> posts) {
+        this.posts = posts;
+    }
+
+    public void addPosts(Post post) {
+        this.posts.add(post);
+    } 
+
+    public ArrayList<Votacion> getVotaciones() {
+        return this.votaciones;
+    }
+
+    public void setVotaciones(ArrayList<Votacion> votaciones) {
+        this.votaciones = votaciones;
+    }
+
+    public void addVotacion(Votacion votacion) {
+        this.votaciones.add(votacion);
     } 
 }

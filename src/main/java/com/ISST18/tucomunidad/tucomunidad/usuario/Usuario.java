@@ -2,33 +2,36 @@ package com.ISST18.tucomunidad.tucomunidad.usuario;
 
 import java.util.ArrayList;
 
+
 public class Usuario {
+    static Long nextId = 0L;
+
     private Long id;
     private String nombre;
     private String[] apellidos;
     private String email;
     private String password;
     private String piso;
-    private Roles rol;
+    private int rol;
     private ArrayList<String> comunidades;
 
     public Usuario(
-        Long id,
         String nombre, 
         String[] apellidos, 
         String email, 
         String password, 
         String piso, 
-        Roles rol, 
-        ArrayList<String> comunidades) {
-            this.id = id;
-            this.nombre = nombre;
-            this.apellidos = apellidos;
-            this.email = email;
-            this.password = password;
-            this.piso = piso;
-            this.rol = rol;
-            this.comunidades = comunidades; 
+        int rol
+    ) {
+        this.id = nextId;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.password = password;
+        this.piso = piso;
+        this.rol = rol;
+        this.comunidades = new ArrayList<>(); 
+        nextId++;
     }
 
     public Long getId() {
@@ -79,11 +82,11 @@ public class Usuario {
         this.piso = piso;
     }
 
-    public Roles getRol() {
+    public int getRol() {
         return this.rol;
     }
 
-    public void setRol(Roles rol) {
+    public void setRol(int rol) {
         this.rol = rol;
     }
 
@@ -94,4 +97,14 @@ public class Usuario {
     public void setComunidades(ArrayList<String> comunidades) {
         this.comunidades = comunidades;
     }
+
+    public void addComunidad(String comunityCode) {
+        this.comunidades.add(comunityCode);
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario: " + this.id;
+    } 
+
 }
