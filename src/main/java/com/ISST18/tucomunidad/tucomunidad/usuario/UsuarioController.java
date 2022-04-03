@@ -106,13 +106,12 @@ public class UsuarioController {
 
     @CrossOrigin
     @PostMapping(path = "api/v1/usuario/comunidad")
-    public void addComunity(
-        @RequestBody String comunitycode, 
-        @RequestBody String email, 
-        @RequestBody String password) {
-        Usuario user = this.login(email, password);
+    public boolean addComunity(
+        @RequestBody ComUser data) {
+        Usuario user = this.login(data.email, data.password);
         if (Objects.nonNull(user))
-            user.addComunidad(comunitycode);
+            user.addComunidad(data.comunitycode);
+        return true;
     }
 
 }
