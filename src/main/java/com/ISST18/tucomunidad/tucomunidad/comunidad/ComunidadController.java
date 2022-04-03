@@ -86,9 +86,9 @@ public class ComunidadController {
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/post/delete")
-    public boolean deletePost(@PathVariable String comunityCode, @RequestBody IdObject data) {
+    public boolean deletePost(@PathVariable String comunityCode, @RequestBody Long id) {
         Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.removePost(data.id);
+        comunidad.removePost(id);
         return true;
     }
 
@@ -102,9 +102,9 @@ public class ComunidadController {
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/votacion/delete")
-    public boolean deleteVotacion(@PathVariable String comunityCode, @RequestBody IdObject data) {
+    public boolean deleteVotacion(@PathVariable String comunityCode, @RequestBody Long id) {
         Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.removeVotacion(data.id);
+        comunidad.removeVotacion(id);
         return true;
     }
     
