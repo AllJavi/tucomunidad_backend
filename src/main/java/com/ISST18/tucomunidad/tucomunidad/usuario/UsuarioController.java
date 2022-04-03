@@ -105,14 +105,14 @@ public class UsuarioController {
     }
 
     @CrossOrigin
-    @PutMapping(path = "api/v1/usuario/comunidad/{comunityCode}")
+    @PostMapping(path = "api/v1/usuario/comunidad")
     public void addComunity(
-        @PathVariable String comunityCode, 
-        @RequestParam String email, 
-        @RequestParam String password) {
+        @RequestBody String comunitycode, 
+        @RequestBody String email, 
+        @RequestBody String password) {
         Usuario user = this.login(email, password);
         if (Objects.nonNull(user))
-            user.addComunidad(comunityCode);
+            user.addComunidad(comunitycode);
     }
 
 }
