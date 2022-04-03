@@ -78,12 +78,25 @@ public class Comunidad {
         return this.posts;
     }
 
+    public Post getPost(Long id) {
+        for(int i = 0; i < this.posts.size(); i++)
+            if (this.posts.get(i).getId().compareTo(id) == 0)
+                return this.posts.get(i);
+        return null;
+    }
+
     public void setPosts(ArrayList<Post> posts) {
         this.posts = posts;
     }
 
     public void addPosts(Post post) {
         this.posts.add(post);
+    } 
+
+    public void removePost(Long id) {
+        for(int i = 0; i < this.posts.size(); i++) 
+            if (this.posts.get(i).getId().compareTo(id) == 0)
+                posts.remove(i);
     } 
 
     public ArrayList<Votacion> getVotaciones() {
@@ -96,6 +109,12 @@ public class Comunidad {
 
     public void addVotacion(Votacion votacion) {
         this.votaciones.add(votacion);
+    } 
+
+    public void removeVotacion(Long id) {
+        for(int i = 0; i < this.votaciones.size(); i++) 
+            if (this.votaciones.get(i).getId().compareTo(id) == 0)
+                votaciones.remove(i);
     } 
 
     public ArrayList<Instalacion> getInstalaciones() {

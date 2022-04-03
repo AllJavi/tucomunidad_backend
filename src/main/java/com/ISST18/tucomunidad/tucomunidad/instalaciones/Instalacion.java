@@ -21,6 +21,7 @@ public class Instalacion {
         int precio
     ) {
         this.id = nextId++;
+        this.nombre = nombre;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.intervalo = intervalo;

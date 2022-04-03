@@ -62,6 +62,11 @@ public class Post {
     }
 
     public void newUpvoted(Usuario upvoted) {
+        for (int i = 0; i < this.upvoted.size(); i++)
+            if (upvoted.getId().compareTo(this.upvoted.get(i).getId()) == 0) {
+                this.upvoted.remove(i);
+                return;
+            }
         this.upvoted.add(upvoted);
     }
 }

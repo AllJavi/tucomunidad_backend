@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ISST18.tucomunidad.tucomunidad.usuario.Usuario;
 import com.ISST18.tucomunidad.tucomunidad.post.Post;
 import com.ISST18.tucomunidad.tucomunidad.votacion.Votacion;
 import com.ISST18.tucomunidad.tucomunidad.instalaciones.Instalacion;
@@ -73,10 +74,37 @@ public class ComunidadController {
     }
 
     @CrossOrigin
+    @PostMapping(path = "api/v1/comunidad/{comunityCode}/post/{postId}")
+    public boolean upVotedPost(
+        @PathVariable String comunityCode, 
+        @PathVariable Long postId,
+        @RequestBody Usuario upvoted) {
+        Comunidad comunidad = findByComunityCode(comunityCode);
+        comunidad.getPost(postId).newUpvoted(upvoted);
+        return true;
+    }
+
+    @CrossOrigin
+    @PostMapping(path = "api/v1/comunidad/{comunityCode}/post/delete")
+    public boolean deletePost(@PathVariable String comunityCode, @RequestBody IdObject data) {
+        Comunidad comunidad = findByComunityCode(comunityCode);
+        comunidad.removePost(data.id);
+        return true;
+    }
+
+    @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/votacion")
     public boolean newVotacion(@PathVariable String comunityCode, @RequestBody Votacion votacion) {
         Comunidad comunidad = findByComunityCode(comunityCode);
         comunidad.addVotacion(votacion);
+        return true;
+    }
+
+    @CrossOrigin
+    @PostMapping(path = "api/v1/comunidad/{comunityCode}/votacion/delete")
+    public boolean deleteVotacion(@PathVariable String comunityCode, @RequestBody IdObject data) {
+        Comunidad comunidad = findByComunityCode(comunityCode);
+        comunidad.removeVotacion(data.id);
         return true;
     }
     
