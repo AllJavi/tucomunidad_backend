@@ -97,12 +97,14 @@ public class UsuarioController {
         return user;
     }
 
+    @CrossOrigin
     @PostMapping(path = "api/v1/usuario/register")
     public boolean register(@RequestBody Usuario user) {
         this.usuarios.add(user);
         return true;
     }
 
+    @CrossOrigin
     @PutMapping(path = "api/v1/usuario/comunidad/{comunityCode}")
     public void addComunity(
         @PathVariable String comunityCode, 

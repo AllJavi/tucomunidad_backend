@@ -1,5 +1,6 @@
 package com.ISST18.tucomunidad.tucomunidad.comunidad;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,12 +57,14 @@ public class ComunidadController {
     }
 
 
+    @CrossOrigin
     @RequestMapping(path = "api/v1/comunidad/{comunityCode}")
     @ResponseBody
     public Comunidad info(@PathVariable String comunityCode) {
         return findByComunityCode(comunityCode);
     }
 
+    @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/post")
     public boolean newPost(@PathVariable String comunityCode, @RequestBody Post post) {
         Comunidad comunidad = findByComunityCode(comunityCode);
@@ -69,6 +72,7 @@ public class ComunidadController {
         return true;
     }
 
+    @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/votacion")
     public boolean newVotacion(@PathVariable String comunityCode, @RequestBody Votacion votacion) {
         Comunidad comunidad = findByComunityCode(comunityCode);

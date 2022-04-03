@@ -2,6 +2,8 @@ package com.ISST18.tucomunidad.tucomunidad.post;
 
 import com.ISST18.tucomunidad.tucomunidad.usuario.Usuario;
 
+import java.util.ArrayList;
+
 public class Post {
     static Long nextId = 0L;
 
@@ -9,7 +11,7 @@ public class Post {
     private String titulo;
     private String cuerpo;
     private Usuario autor;
-    private int upvoted;
+    private ArrayList<Usuario> upvoted;
 
     public Post(
         String titulo,
@@ -20,7 +22,7 @@ public class Post {
         this.titulo = titulo;
         this.cuerpo = cuerpo;
         this.autor = autor;
-        this.upvoted = 0;
+        this.upvoted = new ArrayList<>();
     }
 
     public Long getId() {
@@ -51,15 +53,15 @@ public class Post {
         return this.autor;
     }
 
-    public int getUpvoted() {
+    public ArrayList<Usuario> getUpvoted() {
         return this.upvoted;
     }
 
-    public void setUpvoted(int upvoted) {
+    public void setUpvoted(ArrayList<Usuario> upvoted) {
         this.upvoted = upvoted;
     }
 
-    public void newUpvoted() {
-        this.upvoted++;
+    public void newUpvoted(Usuario upvoted) {
+        this.upvoted.add(upvoted);
     }
 }
