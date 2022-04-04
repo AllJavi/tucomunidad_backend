@@ -29,7 +29,7 @@ public class ComunidadController {
 
         Instalacion piscina = new Instalacion(
             "piscina",
-            "https://www.telemadrid.es/2019/11/14/noticias/sociedad/reforma-piscina-municipal-Elipa-millones_2176892347_7405481_1300x731.jpg",
+            "https://img.europapress.es/fotoweb/fotonoticia_20200704083334_420.jpg",
             800,
             2000,
             60,
@@ -39,7 +39,7 @@ public class ComunidadController {
 
         Instalacion padel = new Instalacion(
             "padel",
-            "https://cadrete.es/wp-content/uploads/2020/09/Pista-padel-pabellon.jpg",
+            "https://sportglobal.es/wp-content/uploads/2019/05/instalacion-pista-padel.jpg",
             1000,
             2200,
             30,
