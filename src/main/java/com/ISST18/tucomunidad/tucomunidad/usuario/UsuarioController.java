@@ -30,7 +30,7 @@ public class UsuarioController {
         this.usuarios.add(u1);
         Usuario u2 = new Usuario(
             "Monica", 
-            new String[]{"Rodriguez", "Muñoz"}, 
+            new String[]{"Rodriguez", "Laranjo"}, 
             "m.rmunoz@alumnos.upm.com",
             "1234", 
             "1A",

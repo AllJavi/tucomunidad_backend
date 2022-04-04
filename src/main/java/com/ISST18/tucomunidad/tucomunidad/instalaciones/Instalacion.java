@@ -7,6 +7,7 @@ public class Instalacion {
 
     private Long id;
     private String nombre;
+    private String url;
     private int horaInicio;
     private int horaFin;
     private int intervalo;
@@ -15,6 +16,7 @@ public class Instalacion {
 
     public Instalacion(
         String nombre,
+        String url,
         int horaInicio,
         int horaFin,
         int intervalo,
@@ -22,6 +24,7 @@ public class Instalacion {
     ) {
         this.id = nextId++;
         this.nombre = nombre;
+        this.url = url;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.intervalo = intervalo;
@@ -44,6 +47,14 @@ public class Instalacion {
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public int getHoraInicio() {
