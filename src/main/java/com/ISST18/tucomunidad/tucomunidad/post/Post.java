@@ -12,6 +12,7 @@ public class Post {
     private String cuerpo;
     private Usuario autor;
     private ArrayList<Usuario> upvoted;
+    private ArrayList<Post> respuestas;
 
     public Post(
         String titulo,
@@ -23,6 +24,7 @@ public class Post {
         this.cuerpo = cuerpo;
         this.autor = autor;
         this.upvoted = new ArrayList<>();
+        this.respuestas = new ArrayList<>();
     }
 
     public Long getId() {
@@ -68,5 +70,26 @@ public class Post {
                 return;
             }
         this.upvoted.add(upvoted);
+    }
+
+    public ArrayList<Post> getSubPost() {
+        return this.respuestas;
+    }
+
+    public void setSubPost(ArrayList<Post> respuestas) {
+        this.respuestas = respuestas;
+    }
+
+    public void newSubPost(Post respuesta) {
+        this.respuestas.add(respuesta);
+    }
+
+    public void removeSubPost(Long id) {
+        for (int i = 0; i < this.respuestas.size(); i++) {
+            if (this.respuestas.get(i).getId().compareTo(id) == 0) {
+                this.respuestas.remove(i);
+                return;
+            }
+        }
     }
 }

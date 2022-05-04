@@ -93,6 +93,15 @@ public class Instalacion {
         this.reservas.add(reserva);
     }
 
+    public void removeReserva(Long id) {
+        for (int i = 0; i < this.reservas.size(); i++) {
+            if (this.reservas.get(i).getId().compareTo(id) == 0) {
+                this.reservas.remove(i);
+                return;
+            }
+        }
+    }
+
     public int getPrecio() {
         return this.precio;
     }

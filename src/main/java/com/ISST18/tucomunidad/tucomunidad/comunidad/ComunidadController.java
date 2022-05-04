@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ISST18.tucomunidad.tucomunidad.usuario.Usuario;
 import com.ISST18.tucomunidad.tucomunidad.post.Post;
 import com.ISST18.tucomunidad.tucomunidad.votacion.Votacion;
+import com.ISST18.tucomunidad.tucomunidad.reunion.Reunion;
 import com.ISST18.tucomunidad.tucomunidad.instalaciones.Instalacion;
+import com.ISST18.tucomunidad.tucomunidad.instalaciones.Reserva;
 
 import java.util.ArrayList;
 
@@ -32,7 +34,7 @@ public class ComunidadController {
             "https://img.europapress.es/fotoweb/fotonoticia_20200704083334_420.jpg",
             800,
             2000,
-            60,
+            100,
             0
         );
         c1.addInstalacion(piscina);
@@ -42,7 +44,7 @@ public class ComunidadController {
             "https://sportglobal.es/wp-content/uploads/2019/05/instalacion-pista-padel.jpg",
             1000,
             2200,
-            30,
+            50,
             5
         );
         c1.addInstalacion(padel);
@@ -95,6 +97,15 @@ public class ComunidadController {
     }
 
     @CrossOrigin
+    @PostMapping(path = "api/v1/comunidad/{comunityCode}/{parentPost}/post")
+    public boolean newSubPost(@PathVariable String comunityCode, @PathVariable Long parentPost, @RequestBody Post post) {
+        Comunidad comunidad = findByComunityCode(comunityCode);
+        Post parent = comunidad.getPost(parentPost);
+        parent.newSubPost(post);
+        return true;
+    }
+
+    @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/votacion")
     public boolean newVotacion(@PathVariable String comunityCode, @RequestBody Votacion votacion) {
         Comunidad comunidad = findByComunityCode(comunityCode);
@@ -107,6 +118,45 @@ public class ComunidadController {
     public boolean deleteVotacion(@PathVariable String comunityCode, @RequestBody Long id) {
         Comunidad comunidad = findByComunityCode(comunityCode);
         comunidad.removeVotacion(id);
+        return true;
+    }
+
+    @CrossOrigin
+    @PostMapping(path = "api/v1/comunidad/{comunityCode}/{idInstalacion}/")
+    public boolean addReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion, @RequestBody Reserva reserva) {
+        Comunidad comunidad = findByComunityCode(comunityCode);
+        int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
+        if (instalacionIndex == -1) return false;
+        comunidad.getInstalaciones().get(instalacionIndex).addReserva(reserva);
+        
+        return true;
+    }
+
+    @CrossOrigin
+    @PostMapping(path = "api/v1/comunidad/{comunityCode}/{idInstalacion}/delete")
+    public boolean deleteReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion, @RequestBody Long id) {
+        Comunidad comunidad = findByComunityCode(comunityCode);
+        int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
+        if (instalacionIndex == -1) return false;
+        comunidad.getInstalaciones().get(instalacionIndex).removeReserva(id);
+        
+        return true;
+    }
+
+
+    @CrossOrigin
+    @PostMapping(path = "api/v1/comunidad/{comunityCode}/reunion")
+    public boolean newReunion(@PathVariable String comunityCode, @RequestBody Reunion reunion) {
+        Comunidad comunidad = findByComunityCode(comunityCode);
+        comunidad.addReunion(reunion);
+        return true;
+    }
+
+    @CrossOrigin
+    @PostMapping(path = "api/v1/comunidad/{comunityCode}/reunion/delete")
+    public boolean deleteReunion(@PathVariable String comunityCode, @RequestBody Long id) {
+        Comunidad comunidad = findByComunityCode(comunityCode);
+        comunidad.removeReunion(id);
         return true;
     }
     

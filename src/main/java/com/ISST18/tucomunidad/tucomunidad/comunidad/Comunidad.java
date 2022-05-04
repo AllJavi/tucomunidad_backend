@@ -3,6 +3,7 @@ package com.ISST18.tucomunidad.tucomunidad.comunidad;
 import java.util.ArrayList;
 
 import com.ISST18.tucomunidad.tucomunidad.post.Post;
+import com.ISST18.tucomunidad.tucomunidad.reunion.Reunion;
 import com.ISST18.tucomunidad.tucomunidad.votacion.Votacion;
 import com.ISST18.tucomunidad.tucomunidad.instalaciones.Instalacion;
 
@@ -17,6 +18,7 @@ public class Comunidad {
     private ArrayList<Post> posts;
     private ArrayList<Votacion> votaciones;
     private ArrayList<Instalacion> instalaciones;
+    private ArrayList<Reunion> reuniones;
 
     public Comunidad(
         String calle, 
@@ -32,13 +34,14 @@ public class Comunidad {
         this.posts = new ArrayList<>();
         this.votaciones = new ArrayList<>();
         this.instalaciones = new ArrayList<>();
+        this.reuniones = new ArrayList<>();
     }
 
-    public Long getId() {
+    public long getid() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setid(long id) {
         this.id = id;
     } 
 
@@ -94,9 +97,23 @@ public class Comunidad {
     } 
 
     public void removePost(Long id) {
-        for(int i = 0; i < this.posts.size(); i++) 
-            if (this.posts.get(i).getId().compareTo(id) == 0)
+        for(int i = 0; i < this.posts.size(); i++) { 
+            if (this.posts.get(i).getId().compareTo(id) == 0) {
                 posts.remove(i);
+                return;
+            }
+            this.removePost(id, this.posts.get(i).getSubPost());
+        }
+    } 
+
+    public void removePost(Long id, ArrayList<Post> scope) {
+        for(int i = 0; i < scope.size(); i++) { 
+            if (scope.get(i).getId().compareTo(id) == 0) {
+                scope.remove(i);
+                return;
+            }
+            this.removePost(id, scope.get(i).getSubPost());
+        }
     } 
 
     public ArrayList<Votacion> getVotaciones() {
@@ -121,11 +138,36 @@ public class Comunidad {
         return this.instalaciones;
     }
 
+    public int findByInstalacionId(Long id) {
+        for (int i = 0; i < this.instalaciones.size(); i++)
+            if (this.instalaciones.get(i).getId().compareTo(id) == 0)
+                return i;
+        return -1;
+    }
+
     public void setInstalaciones(ArrayList<Instalacion> instalaciones) {
         this.instalaciones = instalaciones;
     }
 
     public void addInstalacion(Instalacion instalacion) {
         this.instalaciones.add(instalacion);
+    }
+
+    public ArrayList<Reunion> getReuniones() {
+        return this.reuniones;
+    }
+
+    public void setReuniones(ArrayList<Reunion> reuniones) {
+        this.reuniones = reuniones;
+    } 
+
+    public void addReunion(Reunion reunion) {
+        this.reuniones.add(reunion);
+    }
+
+    public void removeReunion(Long id) {
+        for (int i  = 0; i < this.reuniones.size(); i ++)
+        if (this.reuniones.get(i).getId().compareTo(id) == 0)
+            this.reuniones.remove(i);
     }
 }
