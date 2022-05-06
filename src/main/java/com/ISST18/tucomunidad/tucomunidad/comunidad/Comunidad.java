@@ -11,6 +11,7 @@ public class Comunidad {
     static Long nextId = 0L;
 
     private Long id;
+    private String gestorCode;
     private String calle;
     private int numero;
     private String cpostal;
@@ -21,12 +22,14 @@ public class Comunidad {
     private ArrayList<Reunion> reuniones;
 
     public Comunidad(
+        String gestorCode,
         String calle, 
         int numero,
         String cpostal,
         String comunityCode
     ) {
         this.id = nextId++;
+        this.gestorCode = gestorCode;
         this.calle = calle;
         this.numero = numero;
         this.cpostal = cpostal;
@@ -44,6 +47,14 @@ public class Comunidad {
     public void setid(long id) {
         this.id = id;
     } 
+
+    public String getGestor() {
+        return this.gestorCode;
+    }
+
+    public void setGestor(String gestorCode) {
+        this.gestorCode = gestorCode;
+    }
 
     public String getCalle() {
         return this.calle;

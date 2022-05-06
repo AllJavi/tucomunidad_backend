@@ -24,6 +24,7 @@ public class ComunidadController {
     public ComunidadController() {
         this.comunidades = new ArrayList<>();
         Comunidad c1 = new Comunidad(
+                "000000",
                 "Av. Complutense",
                 30,
                 "28040",
@@ -50,6 +51,11 @@ public class ComunidadController {
         this.comunidades.add(c1);
 
     }
+    @RequestMapping(path = "api/v1/comunidad")
+    @ResponseBody
+    public ArrayList<Comunidad> showAll() {
+        return this.comunidades;
+    }
 
     private Comunidad findByComunityCode(String comunityCode) {
         for (Comunidad comunidad : this.comunidades)
@@ -59,8 +65,7 @@ public class ComunidadController {
     }
 
     @CrossOrigin
-    @RequestMapping(path = "api/v1/comunidad/register")
-    @ResponseBody
+    @PostMapping(path = "api/v1/comunidad/register")
     public boolean register(@RequestBody Comunidad comunidad) {
         this.comunidades.add(comunidad);
         return true;
