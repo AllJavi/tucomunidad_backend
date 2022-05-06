@@ -24,43 +24,47 @@ public class ComunidadController {
     public ComunidadController() {
         this.comunidades = new ArrayList<>();
         Comunidad c1 = new Comunidad(
-            "Av. Complutense", 
-            30, 
-            "28040", 
-            "1957");
+                "Av. Complutense",
+                30,
+                "28040",
+                "1957");
 
         Instalacion piscina = new Instalacion(
-            "piscina",
-            "https://img.europapress.es/fotoweb/fotonoticia_20200704083334_420.jpg",
-            800,
-            2000,
-            100,
-            0
-        );
+                "piscina",
+                "https://img.europapress.es/fotoweb/fotonoticia_20200704083334_420.jpg",
+                800,
+                2000,
+                100,
+                0);
         c1.addInstalacion(piscina);
 
         Instalacion padel = new Instalacion(
-            "padel",
-            "https://sportglobal.es/wp-content/uploads/2019/05/instalacion-pista-padel.jpg",
-            1000,
-            2200,
-            50,
-            5
-        );
+                "padel",
+                "https://sportglobal.es/wp-content/uploads/2019/05/instalacion-pista-padel.jpg",
+                1000,
+                2200,
+                50,
+                5);
         c1.addInstalacion(padel);
 
         this.comunidades.add(c1);
-        
-        
+
     }
 
     private Comunidad findByComunityCode(String comunityCode) {
-        for (Comunidad comunidad: this.comunidades) 
+        for (Comunidad comunidad : this.comunidades)
             if (comunidad.getComunityCode().compareTo(comunityCode) == 0)
                 return comunidad;
         return null;
     }
 
+    @CrossOrigin
+    @RequestMapping(path = "api/v1/comunidad/register")
+    @ResponseBody
+    public boolean register(@RequestBody Comunidad comunidad) {
+        this.comunidades.add(comunidad);
+        return true;
+    }
 
     @CrossOrigin
     @RequestMapping(path = "api/v1/comunidad/{comunityCode}")
@@ -80,9 +84,9 @@ public class ComunidadController {
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/post/{postId}")
     public boolean upVotedPost(
-        @PathVariable String comunityCode, 
-        @PathVariable Long postId,
-        @RequestBody Usuario upvoted) {
+            @PathVariable String comunityCode,
+            @PathVariable Long postId,
+            @RequestBody Usuario upvoted) {
         Comunidad comunidad = findByComunityCode(comunityCode);
         comunidad.getPost(postId).newUpvoted(upvoted);
         return true;
@@ -98,7 +102,8 @@ public class ComunidadController {
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/{parentPost}/post")
-    public boolean newSubPost(@PathVariable String comunityCode, @PathVariable Long parentPost, @RequestBody Post post) {
+    public boolean newSubPost(@PathVariable String comunityCode, @PathVariable Long parentPost,
+            @RequestBody Post post) {
         Comunidad comunidad = findByComunityCode(comunityCode);
         Post parent = comunidad.getPost(parentPost);
         parent.newSubPost(post);
@@ -123,26 +128,29 @@ public class ComunidadController {
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/{idInstalacion}/")
-    public boolean addReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion, @RequestBody Reserva reserva) {
+    public boolean addReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
+            @RequestBody Reserva reserva) {
         Comunidad comunidad = findByComunityCode(comunityCode);
         int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
-        if (instalacionIndex == -1) return false;
+        if (instalacionIndex == -1)
+            return false;
         comunidad.getInstalaciones().get(instalacionIndex).addReserva(reserva);
-        
+
         return true;
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/{idInstalacion}/delete")
-    public boolean deleteReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion, @RequestBody Long id) {
+    public boolean deleteReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
+            @RequestBody Long id) {
         Comunidad comunidad = findByComunityCode(comunityCode);
         int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
-        if (instalacionIndex == -1) return false;
+        if (instalacionIndex == -1)
+            return false;
         comunidad.getInstalaciones().get(instalacionIndex).removeReserva(id);
-        
+
         return true;
     }
-
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/reunion")
@@ -159,5 +167,5 @@ public class ComunidadController {
         comunidad.removeReunion(id);
         return true;
     }
-    
+
 }
