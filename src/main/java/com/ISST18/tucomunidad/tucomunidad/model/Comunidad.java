@@ -3,7 +3,8 @@ package com.ISST18.tucomunidad.tucomunidad.model;
 import java.util.ArrayList;
 
 import javax.persistence.Column;  
-import javax.persistence.Entity;  
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;  
 import javax.persistence.Table;
 
@@ -11,8 +12,9 @@ import javax.persistence.Table;
 @Table
 
 public class Comunidad {
-    static Long nextId = 0L;
+    
     @Id
+    @GeneratedValue
     @Column
     private Long id;
     @Column
@@ -33,7 +35,7 @@ public class Comunidad {
     private ArrayList<Instalacion> instalaciones;
     @Column
     private ArrayList<Reunion> reuniones;
-
+    public Comunidad(){}
     public Comunidad(
         String gestorCode,
         String calle, 
@@ -41,7 +43,7 @@ public class Comunidad {
         String cpostal,
         String comunityCode
     ) {
-        this.id = nextId++;
+        
         this.gestorCode = gestorCode;
         this.calle = calle;
         this.numero = numero;

@@ -2,6 +2,7 @@ package com.ISST18.tucomunidad.tucomunidad.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,21 +61,18 @@ public class ComunidadController {
     @RequestMapping(path = "api/v1/comunidad")
     @ResponseBody
     public ArrayList<Comunidad> showAll() {
-        return this.comunidades;
+        return comunidadService.getAllComunidades();
     }
-
-    private Comunidad findByComunityCode(String comunityCode) {
-        for (Comunidad comunidad : this.comunidades)
-            if (comunidad.getComunityCode().compareTo(comunityCode) == 0)
-                return comunidad;
-        return null;
+    
+    @GetMapping("api/v1/comunidad/{comunityCode}")
+    public Comunidad findByComunityCode(@PathVariable String comunityCode) {
+        return comunidadService.findByComunityCode(comunityCode);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/register")
-    public boolean register(@RequestBody Comunidad comunidad) {
-        this.comunidades.add(comunidad);
-        return true;
+    public String register(@RequestBody Comunidad comunidad) {
+        return comunidadService.register(comunidad);
     }
 
     @CrossOrigin

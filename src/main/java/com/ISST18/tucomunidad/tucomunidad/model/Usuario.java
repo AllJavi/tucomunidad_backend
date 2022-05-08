@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Usuario {
-    
+
     @Id
     @GeneratedValue
     @Column
@@ -30,20 +30,39 @@ public class Usuario {
     private int rol;
     @Column
     private ArrayList<String> comunidades;
-    public Usuario(){}
+
+    public Usuario() {
+    }
+
     public Usuario(
             String nombre,
             String apellidos,
             String email,
             String password,
             String piso) {
-        
+
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
         this.password = password;
         this.piso = piso;
         this.rol = 0;
+        this.comunidades = new ArrayList<>();
+    }
+
+    public Usuario(String nombre,
+            String apellidos,
+            String email,
+            String password,
+            String piso,
+            int rol) {
+
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.password = password;
+        this.piso = piso;
+        this.rol = rol;
         this.comunidades = new ArrayList<>();
     }
 
