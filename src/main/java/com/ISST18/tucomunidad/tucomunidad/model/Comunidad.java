@@ -55,13 +55,9 @@ public class Comunidad {
         this.reuniones = new ArrayList<>();
     }
 
-    public long getid() {
+    public Long getid() {
         return this.id;
     }
-
-    public void setid(long id) {
-        this.id = id;
-    } 
 
     public String getGestor() {
         return this.gestorCode;

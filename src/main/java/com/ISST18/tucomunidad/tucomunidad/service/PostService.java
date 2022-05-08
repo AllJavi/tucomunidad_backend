@@ -46,4 +46,11 @@ public class PostService {
         newPost(aux);
         return true;
     }
+
+    public ArrayList<Post> getPostByComunityId(long comunityId){
+        ArrayList <Post> toShow = new ArrayList<Post>();
+        ArrayList <Post> posts = getAllPost();
+        posts.forEach(post -> { if(post.getComunidadId() == comunityId) toShow.add(post); });
+        return toShow;
+    }
 }

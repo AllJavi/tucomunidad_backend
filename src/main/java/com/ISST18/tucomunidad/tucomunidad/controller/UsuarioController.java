@@ -79,8 +79,8 @@ public class UsuarioController {
     //         this.usuarios.get(i).addComunidad("1957");
     // }
     @GetMapping("api/v1/usuario/load")
-    public void firstUsers(){
-        usuarioService.firstUsers();
+    public void seedUsers(){
+        usuarioService.seedUsers();
     }
     @GetMapping("/usuario/{id}") 
     private Usuario findByEmail(@PathVariable("id") String email) {
@@ -118,7 +118,7 @@ public class UsuarioController {
     }
 
     @CrossOrigin
-    @PostMapping(path = "api/v1/usuario/delete/{id}")
+    @GetMapping(path = "api/v1/usuario/delete/{id}")
     public boolean deleteUser(@PathVariable Long id) {
         // this.usuarios.add(user);
         // return true;

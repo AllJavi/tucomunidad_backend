@@ -15,7 +15,7 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
    
-    public void firstUsers() {
+    public void seedUsers() {
         ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
         usuarioRepository.findAll().forEach(Usuario -> Usuarios.add(Usuario));
         Usuario u1 = new Usuario(

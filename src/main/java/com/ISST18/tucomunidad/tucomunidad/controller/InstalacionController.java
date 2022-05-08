@@ -6,26 +6,44 @@ import com.ISST18.tucomunidad.tucomunidad.model.Instalacion;
 import com.ISST18.tucomunidad.tucomunidad.service.InstalacionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class InstalacionController {
     @Autowired
-    InstalacionService votacionService;
+    InstalacionService instalacionService;
 
+    @CrossOrigin
+    @GetMapping("api/v1/instalacion")
     public ArrayList<Instalacion> getAllInstalacion() {
-        return votacionService.getAllInstalacion();
+        return instalacionService.getAllInstalacion();
     }
 
-    public Instalacion getInstalacionById(Long id) {
-        return votacionService.getInstalacionById(id);
+    @CrossOrigin
+    @GetMapping("api/v1/instalacion/{id}")
+    public Instalacion getInstalacionById(@PathVariable Long id) {
+        return instalacionService.getInstalacionById(id);
     }
 
-    public void newInstalacion(Instalacion instalacion) {
-        votacionService.newInstalacion(instalacion);
+    @CrossOrigin
+    @PostMapping("api/v1/instalacion/")
+    public void newInstalacion(@RequestBody Instalacion instalacion) {
+        instalacionService.newInstalacion(instalacion);
     }
 
-    public void delete(Long id) {
-        votacionService.delete(id);
+    @CrossOrigin
+    @GetMapping("api/v1/instalacion/delete/{id}")
+    public void delete(@PathVariable Long id) {
+        instalacionService.delete(id);
+    }
+
+    @GetMapping("api/v1/instalacion/load")
+    public void seedInstalacion(){
+        instalacionService.seedInstalacion();
     }
 }
