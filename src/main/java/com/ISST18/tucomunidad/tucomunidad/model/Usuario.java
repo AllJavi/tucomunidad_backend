@@ -1,36 +1,50 @@
-package com.ISST18.tucomunidad.tucomunidad.usuario;
+package com.ISST18.tucomunidad.tucomunidad.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
 public class Usuario {
-    static Long nextId = 0L;
-
+    
+    @Id
+    @GeneratedValue
+    @Column
     private Long id;
+    @Column
     private String nombre;
-    private String[] apellidos;
+    @Column
+    private String apellidos;
+    @Column
     private String email;
+    @Column
     private String password;
+    @Column
     private String piso;
+    @Column
     private int rol;
+    @Column
     private ArrayList<String> comunidades;
-
+    public Usuario(){}
     public Usuario(
-        String nombre, 
-        String[] apellidos, 
-        String email, 
-        String password, 
-        String piso, 
-        int rol
-    ) {
-        this.id = nextId++;
+            String nombre,
+            String apellidos,
+            String email,
+            String password,
+            String piso) {
+        
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
         this.password = password;
         this.piso = piso;
-        this.rol = rol;
-        this.comunidades = new ArrayList<>(); 
+        this.rol = 0;
+        this.comunidades = new ArrayList<>();
     }
 
     public Long getId() {
@@ -38,9 +52,9 @@ public class Usuario {
     }
 
     public void setId(Long id) {
-        this.id = id; 
-    } 
-    
+        this.id = id;
+    }
+
     public String getNombre() {
         return this.nombre;
     }
@@ -49,11 +63,11 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String[] getApellidos() {
+    public String getApellidos() {
         return this.apellidos;
     }
 
-    public void setApellidos(String[] apellidos) {
+    public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
 
@@ -104,6 +118,6 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario: " + this.id;
-    } 
+    }
 
 }

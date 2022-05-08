@@ -1,4 +1,4 @@
-package com.ISST18.tucomunidad.tucomunidad.gestor;
+package com.ISST18.tucomunidad.tucomunidad.model;
 
 
     

@@ -1,4 +1,4 @@
-package com.ISST18.tucomunidad.tucomunidad.reunion;
+package com.ISST18.tucomunidad.tucomunidad.model;
 
 public class Reunion {
     static Long nextId = 0L;

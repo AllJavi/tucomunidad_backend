@@ -1,6 +1,4 @@
-package com.ISST18.tucomunidad.tucomunidad.post;
-
-import com.ISST18.tucomunidad.tucomunidad.usuario.Usuario;
+package com.ISST18.tucomunidad.tucomunidad.model;
 
 import java.util.ArrayList;
 

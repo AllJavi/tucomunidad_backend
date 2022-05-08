@@ -1,4 +1,4 @@
-package com.ISST18.tucomunidad.tucomunidad.usuario;
+package com.ISST18.tucomunidad.tucomunidad.model;
 
 public class ComUser {
     public String email;

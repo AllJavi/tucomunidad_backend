@@ -1,6 +1,4 @@
-package com.ISST18.tucomunidad.tucomunidad.instalaciones;
-
-import com.ISST18.tucomunidad.tucomunidad.usuario.Usuario;
+package com.ISST18.tucomunidad.tucomunidad.model;
 
 public class Reserva {
     static Long nextId = 0L;

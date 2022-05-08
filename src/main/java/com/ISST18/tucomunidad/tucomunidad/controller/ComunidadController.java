@@ -1,5 +1,6 @@
-package com.ISST18.tucomunidad.tucomunidad.comunidad;
+package com.ISST18.tucomunidad.tucomunidad.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,17 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ISST18.tucomunidad.tucomunidad.usuario.Usuario;
-import com.ISST18.tucomunidad.tucomunidad.post.Post;
-import com.ISST18.tucomunidad.tucomunidad.votacion.Votacion;
-import com.ISST18.tucomunidad.tucomunidad.reunion.Reunion;
-import com.ISST18.tucomunidad.tucomunidad.instalaciones.Instalacion;
-import com.ISST18.tucomunidad.tucomunidad.instalaciones.Reserva;
+import com.ISST18.tucomunidad.tucomunidad.model.Comunidad;
+import com.ISST18.tucomunidad.tucomunidad.model.Instalacion;
+import com.ISST18.tucomunidad.tucomunidad.model.Post;
+import com.ISST18.tucomunidad.tucomunidad.model.Reserva;
+import com.ISST18.tucomunidad.tucomunidad.model.Reunion;
+import com.ISST18.tucomunidad.tucomunidad.model.Usuario;
+import com.ISST18.tucomunidad.tucomunidad.model.Votacion;
+import com.ISST18.tucomunidad.tucomunidad.service.ComunidadService;
 
 import java.util.ArrayList;
 
 @RestController
 public class ComunidadController {
+    @Autowired
+    ComunidadService comunidadService;
+
     private ArrayList<Comunidad> comunidades;
 
     public ComunidadController() {

@@ -1,24 +1,37 @@
-package com.ISST18.tucomunidad.tucomunidad.comunidad;
+package com.ISST18.tucomunidad.tucomunidad.model;
 
 import java.util.ArrayList;
 
-import com.ISST18.tucomunidad.tucomunidad.post.Post;
-import com.ISST18.tucomunidad.tucomunidad.reunion.Reunion;
-import com.ISST18.tucomunidad.tucomunidad.votacion.Votacion;
-import com.ISST18.tucomunidad.tucomunidad.instalaciones.Instalacion;
+import javax.persistence.Column;  
+import javax.persistence.Entity;  
+import javax.persistence.Id;  
+import javax.persistence.Table;
+
+@Entity
+@Table
 
 public class Comunidad {
     static Long nextId = 0L;
-
+    @Id
+    @Column
     private Long id;
+    @Column
     private String gestorCode;
+    @Column
     private String calle;
+    @Column
     private int numero;
+    @Column
     private String cpostal;
+    @Column
     private String comunityCode;
+    @Column
     private ArrayList<Post> posts;
+    @Column
     private ArrayList<Votacion> votaciones;
+    @Column
     private ArrayList<Instalacion> instalaciones;
+    @Column
     private ArrayList<Reunion> reuniones;
 
     public Comunidad(

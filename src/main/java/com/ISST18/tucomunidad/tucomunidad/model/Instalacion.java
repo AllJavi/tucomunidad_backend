@@ -1,4 +1,4 @@
-package com.ISST18.tucomunidad.tucomunidad.instalaciones;
+package com.ISST18.tucomunidad.tucomunidad.model;
 
 import java.util.ArrayList;
 
