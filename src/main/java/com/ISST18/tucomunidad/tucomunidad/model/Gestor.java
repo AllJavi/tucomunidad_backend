@@ -32,6 +32,9 @@ public class Gestor {
     @Column
     private ArrayList<String> comunidades;
 
+    public Gestor() {
+    }
+    
     public Gestor(
         String nombre, 
         String apellidos, 

@@ -25,7 +25,8 @@ public class Reserva {
     @Column
     private Long instalacionId;
 
-
+    public Reserva() {
+    }
     public Reserva(
         int horaInicio,
         int horaFin,

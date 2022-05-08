@@ -29,6 +29,9 @@ public class Votacion {
     @Column
     private long autorId;
 
+    public Votacion() {
+    }
+    
     public Votacion(
         String titulo,
         String opcionA,

@@ -33,6 +33,8 @@ public class Instalacion {
     @Column
     private String comunityCode;
 
+    public Instalacion() {
+    }
     public Instalacion(
         String nombre,
         String url,

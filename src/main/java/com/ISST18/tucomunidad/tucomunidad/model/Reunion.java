@@ -23,6 +23,8 @@ public class Reunion {
     @Column
     private String localizacion;
 
+    public Reunion() {
+    }
     public Reunion(
         String motivo, 
         String fecha,
