@@ -2,26 +2,42 @@ package com.ISST18.tucomunidad.tucomunidad.model;
 
 import java.util.ArrayList;
 
-public class Post {
-    static Long nextId = 0L;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
+public class Post {
+    @Id
+    @Column
     private Long id;
+    @Column
     private String titulo;
+    @Column
     private String cuerpo;
-    private Usuario autor;
-    private ArrayList<Usuario> upvoted;
+    @Column
+    private long autorId;
+    @Column
+    private long comunidadId;
+    @Column
+    public int upvoted;
+    @Column
     private ArrayList<Post> respuestas;
+    
 
     public Post(
         String titulo,
         String cuerpo,
-        Usuario autor
+        long autorId,
+        long comunidadId
     ) {
-        this.id = nextId++;
         this.titulo = titulo;
         this.cuerpo = cuerpo;
-        this.autor = autor;
-        this.upvoted = new ArrayList<>();
+        this.autorId = autorId;
+        this.comunidadId = comunidadId;
+        this.upvoted = 0;
         this.respuestas = new ArrayList<>();
     }
 
@@ -49,25 +65,28 @@ public class Post {
         this.cuerpo = cuerpo;
     }
 
-    public Usuario getAutor() {
-        return this.autor;
+    public long getAutor() {
+        return this.autorId;
     }
 
-    public ArrayList<Usuario> getUpvoted() {
+    public void setAutor(long autorId) {
+        this.autorId = autorId;
+    }
+
+    public long getComunidadId() {
+        return this.comunidadId;
+    }
+
+    public void setComunidadId(long comunidadId) {
+        this.comunidadId = comunidadId;
+    }
+
+    public int getUpvoted() {
         return this.upvoted;
     }
 
-    public void setUpvoted(ArrayList<Usuario> upvoted) {
+    public void setUpvoted(int upvoted) {
         this.upvoted = upvoted;
-    }
-
-    public void newUpvoted(Usuario upvoted) {
-        for (int i = 0; i < this.upvoted.size(); i++)
-            if (upvoted.getId().compareTo(this.upvoted.get(i).getId()) == 0) {
-                this.upvoted.remove(i);
-                return;
-            }
-        this.upvoted.add(upvoted);
     }
 
     public ArrayList<Post> getSubPost() {

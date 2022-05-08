@@ -2,17 +2,36 @@ package com.ISST18.tucomunidad.tucomunidad.model;
 
 import java.util.ArrayList;
 
-public class Instalacion {
-    static Long nextId = 0L;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
+public class Instalacion {
+    
+    @Id
+    @GeneratedValue
+    @Column
     private Long id;
+    @Column
     private String nombre;
+    @Column
     private String url;
+    @Column
     private int horaInicio;
+    @Column
     private int horaFin;
+    @Column
     private int intervalo;
+    @Column
     private ArrayList<Reserva> reservas;
+    @Column
     private int precio;
+    @Column
+    private String comunityCode;
 
     public Instalacion(
         String nombre,
@@ -20,9 +39,9 @@ public class Instalacion {
         int horaInicio,
         int horaFin,
         int intervalo,
-        int precio
+        int precio,
+        String comunityCode
     ) {
-        this.id = nextId++;
         this.nombre = nombre;
         this.url = url;
         this.horaInicio = horaInicio;
@@ -30,6 +49,7 @@ public class Instalacion {
         this.intervalo = intervalo;
         this.reservas =  new ArrayList<>();
         this.precio = precio;
+        this.comunityCode = comunityCode;
     }
 
         
@@ -108,5 +128,13 @@ public class Instalacion {
 
     public void setPrecio(int precio) {
         this.precio = precio;
+    }
+
+    public String getComunityCode() {
+        return this.comunityCode;
+    }
+
+    public void setComunityCode(String comunityCode) {
+        this.comunityCode = comunityCode;
     }
 }

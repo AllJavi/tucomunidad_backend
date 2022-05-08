@@ -15,9 +15,9 @@ import com.ISST18.tucomunidad.tucomunidad.model.Instalacion;
 import com.ISST18.tucomunidad.tucomunidad.model.Post;
 import com.ISST18.tucomunidad.tucomunidad.model.Reserva;
 import com.ISST18.tucomunidad.tucomunidad.model.Reunion;
-import com.ISST18.tucomunidad.tucomunidad.model.Usuario;
 import com.ISST18.tucomunidad.tucomunidad.model.Votacion;
 import com.ISST18.tucomunidad.tucomunidad.service.ComunidadService;
+
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class ComunidadController {
     @Autowired
     ComunidadService comunidadService;
-
+   
     private ArrayList<Comunidad> comunidades;
 
     public ComunidadController() {
@@ -43,7 +43,8 @@ public class ComunidadController {
                 800,
                 2000,
                 100,
-                0);
+                0,
+                "1957");
         c1.addInstalacion(piscina);
 
         Instalacion padel = new Instalacion(
@@ -52,7 +53,8 @@ public class ComunidadController {
                 1000,
                 2200,
                 50,
-                5);
+                5,
+                "1957");
         c1.addInstalacion(padel);
 
         this.comunidades.add(c1);
@@ -80,25 +82,6 @@ public class ComunidadController {
     @ResponseBody
     public Comunidad info(@PathVariable String comunityCode) {
         return findByComunityCode(comunityCode);
-    }
-
-    @CrossOrigin
-    @PostMapping(path = "api/v1/comunidad/{comunityCode}/post")
-    public boolean newPost(@PathVariable String comunityCode, @RequestBody Post post) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.addPosts(post);
-        return true;
-    }
-
-    @CrossOrigin
-    @PostMapping(path = "api/v1/comunidad/{comunityCode}/post/{postId}")
-    public boolean upVotedPost(
-            @PathVariable String comunityCode,
-            @PathVariable Long postId,
-            @RequestBody Usuario upvoted) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.getPost(postId).newUpvoted(upvoted);
-        return true;
     }
 
     @CrossOrigin

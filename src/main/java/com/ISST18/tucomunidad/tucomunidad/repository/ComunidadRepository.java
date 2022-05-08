@@ -4,5 +4,5 @@ import com.ISST18.tucomunidad.tucomunidad.model.Comunidad;
 
 public interface ComunidadRepository extends CrudRepository<Comunidad, Long> {
     
-    
+        
 }

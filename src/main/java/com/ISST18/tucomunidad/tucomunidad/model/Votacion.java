@@ -2,30 +2,46 @@ package com.ISST18.tucomunidad.tucomunidad.model;
 
 import java.util.ArrayList;
 
-public class Votacion {
-    static Long nextId = 0L;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
+public class Votacion {
+
+    @Id
+    @GeneratedValue
+    @Column
     private Long id;
-    private String titulo;
+    @Column
+    private String titulo;  
+    @Column
     private String opcionA;
+    @Column
     private ArrayList<Usuario> votantesA;
+    @Column
     private String opcionB;
+    @Column
     private ArrayList<Usuario> votantesB;
-    private Usuario autor;
+    @Column
+    private long autorId;
 
     public Votacion(
         String titulo,
         String opcionA,
         String opcionB,
-        Usuario autor
+        long autorId
     ) {
-        this.id = nextId++;
+      
         this.titulo = titulo;
         this.opcionA = opcionA;
         this.votantesA = new ArrayList<>();
         this.opcionB = opcionB;
         this.votantesB = new ArrayList<>();
-        this.autor = autor;
+        this.autorId = autorId;
     }
 
     public Long getId() {
@@ -60,12 +76,12 @@ public class Votacion {
         this.opcionA = opcionB;
     }
 
-    public Usuario getAutor() {
-        return this.autor;
+    public long getAutor() {
+        return this.autorId;
     }
 
-    public void setAutor(Usuario autor) {
-        this.autor = autor;
+    public void setAutor(long autorId) {
+        this.autorId = autorId;
     }
 
     public void addOpcionA(Usuario votedUser) {

@@ -5,26 +5,40 @@ package com.ISST18.tucomunidad.tucomunidad.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
 public class Gestor {
-    static Long nextId = 0L;
-
+    
+    @Id
+    @GeneratedValue
+    @Column
     private Long id;
+    @Column
     private String nombre;
-    private String[] apellidos;
+    @Column
+    private String apellidos;
+    @Column
     private String email;
+    @Column
     private String password;
+    @Column
     private String numAdmin;
+    @Column
     private ArrayList<String> comunidades;
 
     public Gestor(
         String nombre, 
-        String[] apellidos, 
+        String apellidos, 
         String email, 
         String password,
         String numAdmin 
     ) {
-        this.id = nextId++;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
@@ -50,11 +64,11 @@ public class Gestor {
         this.nombre = nombre;
     }
 
-    public String[] getApellidos() {
+    public String getApellidos() {
         return this.apellidos;
     }
 
-    public void setApellidos(String[] apellidos) {
+    public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
 

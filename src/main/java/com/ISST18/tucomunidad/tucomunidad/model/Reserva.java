@@ -1,22 +1,43 @@
 package com.ISST18.tucomunidad.tucomunidad.model;
 
-public class Reserva {
-    static Long nextId = 0L;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
+public class Reserva {
+    
+    @Id
+    @GeneratedValue
+    @Column
     private Long id;
+    @Column
     private int horaInicio;
+    @Column
     private int horaFin;
-    private Usuario usuario;
+    @Column
+    private long userId;
+    @Column
+    public Long comunidadId;
+    @Column
+    private Long instalacionId;
+
 
     public Reserva(
         int horaInicio,
         int horaFin,
-        Usuario usuario
+        long userId,
+        Long comunidadId,
+        Long instalacionId
     ) {
-        this.id = nextId++;
         this.horaInicio = horaFin;
         this.horaFin = horaFin;
-        this.usuario = usuario;
+        this.userId = userId;
+        this.comunidadId = comunidadId;
+        this.instalacionId = instalacionId;
     }
 
     public Long getId() {
@@ -43,11 +64,27 @@ public class Reserva {
         this.horaFin = horaFin;
     }
 
-    public Usuario getUsuario() {
-        return this.usuario;
+    public long getUsuario() {
+        return this.userId;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(long userId) {
+        this.userId = userId;
+    }
+
+    public Long getComunidadId() {
+        return this.comunidadId;
+    }
+
+    public void setComunidadId(Long comunidadId) {
+        this.comunidadId = comunidadId;
+    }
+
+    public Long getInstalacionId() {
+        return this.instalacionId;
+    }
+
+    public void setInstalacionId(Long instalacionId) {
+        this.instalacionId = instalacionId;
     }
 }

@@ -1,12 +1,26 @@
 package com.ISST18.tucomunidad.tucomunidad.model;
 
-public class Reunion {
-    static Long nextId = 0L;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
+public class Reunion {
+    
+    @Id
+    @GeneratedValue
+    @Column
     private Long id;
+    @Column
     private String motivo;
+    @Column
     private String fecha;
+    @Column
     private boolean presencial;
+    @Column
     private String localizacion;
 
     public Reunion(
@@ -15,7 +29,6 @@ public class Reunion {
         boolean presencial,
         String localizacion
     ) {
-        this.id = nextId++;
         this.motivo = motivo;
         this.fecha = fecha;
         this.presencial = presencial;

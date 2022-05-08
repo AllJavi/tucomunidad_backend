@@ -1,7 +1,6 @@
 package com.ISST18.tucomunidad.tucomunidad.service;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ISST18.tucomunidad.tucomunidad.model.Comunidad;
@@ -21,10 +20,6 @@ public class ComunidadService {
 
     public Comunidad getComunidadById(long id) {
         return comunidadRepository.findById(id).get();
-    }
-
-    public void saveOrUpdate(Comunidad Comunidad) {
-        comunidadRepository.save(Comunidad);
     }
 
     public void delete(long id) {
@@ -55,80 +50,46 @@ public class ComunidadService {
         return findByComunityCode(comunityCode);
     }
 
-    public boolean newPost(String comunityCode, Post post) {
+    public Comunidad newPost(String comunityCode, Post post) {
         Comunidad comunidad = findByComunityCode(comunityCode);
         comunidad.addPosts(post);
-        return true;
-    }
-
-    public boolean upVotedPost(
-            @PathVariable String comunityCode,
-            @PathVariable Long postId,
-            @RequestBody Usuario upvoted) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.getPost(postId).newUpvoted(upvoted);
-        return true;
-    }
-
-    public boolean deletePost(@PathVariable String comunityCode, @RequestBody Long id) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.removePost(id);
-        return true;
-    }
-
-    public boolean newSubPost(@PathVariable String comunityCode, @PathVariable Long parentPost,
-            @RequestBody Post post) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        Post parent = comunidad.getPost(parentPost);
-        parent.newSubPost(post);
-        return true;
-    }
-
-  
-    public boolean newVotacion(@PathVariable String comunityCode, @RequestBody Votacion votacion) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.addVotacion(votacion);
-        return true;
-    }
-
-    public boolean deleteVotacion(@PathVariable String comunityCode, @RequestBody Long id) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.removeVotacion(id);
-        return true;
+        comunidadRepository.deleteById(comunidad.getid());
+        comunidadRepository.save(comunidad);
+        return comunidad;
     }
 
  
-    public boolean addReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
-            @RequestBody Reserva reserva) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
-        if (instalacionIndex == -1)
-            return false;
-        comunidad.getInstalaciones().get(instalacionIndex).addReserva(reserva);
+    // public boolean addReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
+    //         @RequestBody Reserva reserva) {
+    //     Comunidad comunidad = findByComunityCode(comunityCode);
+    //     int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
+    //     if (instalacionIndex == -1)
+    //         return false;
+    //     comunidad.getInstalaciones().get(instalacionIndex).addReserva(reserva);
 
-        return true;
-    }
+    //     return true;
+    // }
 
-    public boolean deleteReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
-            @RequestBody Long id) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
-        if (instalacionIndex == -1)
-            return false;
-        comunidad.getInstalaciones().get(instalacionIndex).removeReserva(id);
+    // public boolean deleteReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
+    //         @RequestBody Long id) {
+    //     Comunidad comunidad = findByComunityCode(comunityCode);
+    //     int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
+    //     if (instalacionIndex == -1)
+    //         return false;
+    //     comunidad.getInstalaciones().get(instalacionIndex).removeReserva(id);
 
-        return true;
-    }
+    //     return true;
+    // }
 
-    public boolean newReunion(@PathVariable String comunityCode, @RequestBody Reunion reunion) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.addReunion(reunion);
-        return true;
-    }
+    // public boolean newReunion(@PathVariable String comunityCode, @RequestBody Reunion reunion) {
+    //     Comunidad comunidad = findByComunityCode(comunityCode);
+    //     comunidad.addReunion(reunion);
+    //     return true;
+    // }
 
-    public boolean deleteReunion(@PathVariable String comunityCode, @RequestBody Long id) {
-        Comunidad comunidad = findByComunityCode(comunityCode);
-        comunidad.removeReunion(id);
-        return true;
-    }
+    // public boolean deleteReunion(@PathVariable String comunityCode, @RequestBody Long id) {
+    //     Comunidad comunidad = findByComunityCode(comunityCode);
+    //     comunidad.removeReunion(id);
+    //     return true;
+    // }
 }

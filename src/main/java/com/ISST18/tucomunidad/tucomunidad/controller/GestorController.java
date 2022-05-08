@@ -22,7 +22,7 @@ public class GestorController {
         this.gestores = new ArrayList<>();
         Gestor u1 = new Gestor(
             "Ivan", 
-            new String[]{"Perez", "Broskis"}, 
+            "Perez Broskis", 
             "i.pbroskis@alumnos.upm.es",
             "1234", 
             "000000"
@@ -30,7 +30,7 @@ public class GestorController {
         this.gestores.add(u1);
         Gestor u2 = new Gestor(
             "Justin", 
-            new String[]{"Drowzee", "Broskis"}, 
+            "Drowzee Broskis", 
             "i.pbroskis@alumnos.upm.es",
             "1234", 
             "000001"
