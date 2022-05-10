@@ -48,8 +48,11 @@ public class GestorService {
 
     public Gestor findByEmail(String email) {
         
-        for (Gestor user: getAllGestors()) 
-            if (user.getEmail().compareTo(email) == 0) return user;
+        for (Gestor gestor: getAllGestors()) 
+            if (gestor.getEmail().compareTo(email) == 0) {
+                System.out.println("nice");
+                return gestor;
+            }
         return null;
     }
 
