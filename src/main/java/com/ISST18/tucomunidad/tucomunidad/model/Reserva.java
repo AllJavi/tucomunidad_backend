@@ -21,7 +21,7 @@ public class Reserva {
     @Column
     private long userId;
     @Column
-    public Long comunidadId;
+    public String comunityCode;
     @Column
     private Long instalacionId;
 
@@ -31,13 +31,13 @@ public class Reserva {
         int horaInicio,
         int horaFin,
         long userId,
-        Long comunidadId,
+        String comunityCode,
         Long instalacionId
     ) {
         this.horaInicio = horaFin;
         this.horaFin = horaFin;
         this.userId = userId;
-        this.comunidadId = comunidadId;
+        this.comunityCode = comunityCode;
         this.instalacionId = instalacionId;
     }
 
@@ -73,12 +73,12 @@ public class Reserva {
         this.userId = userId;
     }
 
-    public Long getComunidadId() {
-        return this.comunidadId;
+    public String getcomunityCode() {
+        return this.comunityCode;
     }
 
-    public void setComunidadId(Long comunidadId) {
-        this.comunidadId = comunidadId;
+    public void setcomunityCode(String comunityCode) {
+        this.comunityCode = comunityCode;
     }
 
     public Long getInstalacionId() {

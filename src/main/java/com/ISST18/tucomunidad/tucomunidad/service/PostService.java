@@ -47,10 +47,10 @@ public class PostService {
         return true;
     }
 
-    public ArrayList<Post> getPostByComunityId(long comunityId){
+    public ArrayList<Post> getPostBycomunityCode(String comunityCode){
         ArrayList <Post> toShow = new ArrayList<Post>();
         ArrayList <Post> posts = getAllPost();
-        posts.forEach(post -> { if(post.getComunidadId() == comunityId) toShow.add(post); });
+        posts.forEach(post -> { if(post.getcomunityCode() == comunityCode) toShow.add(post); });
         return toShow;
     }
 }

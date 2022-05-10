@@ -17,43 +17,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PostController {
     @Autowired
-    PostService votacionService;
+    PostService postService;
 
     @CrossOrigin
     @GetMapping("api/v1/post")
     public ArrayList<Post> getAllPost() {
-        return votacionService.getAllPost();
+        return postService.getAllPost();
     }
     @CrossOrigin
     @GetMapping("api/v1/post({id}")
     public Post getPostById(@PathVariable Long id) {
-        return votacionService.getPostById(id);
+        return postService.getPostById(id);
     }
     @CrossOrigin
     @PostMapping("api/v1/post/")
     public void newPost(@RequestBody Post post) {
-        votacionService.newPost(post);
+        postService.newPost(post);
     }
 
     @CrossOrigin
     @GetMapping("api/v1/post/delete/{id}")
     public void delete(@PathVariable Long id) {
-        votacionService.delete(id);
+        postService.delete(id);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/post")
     public int upVotedPost(@RequestParam Long postId) {
-        return votacionService.upVotedPost(postId);
+        return postService.upVotedPost(postId);
     }
     @CrossOrigin
     @PostMapping(path = "api/v1/post/{id}/")
     public boolean newSubPost(@PathVariable Long parentPostId, @RequestBody Post post) {
-        return votacionService.newSubPost(parentPostId, post);
+        return postService.newSubPost(parentPostId, post);
     }
     @CrossOrigin
     @GetMapping(path = "api/v1/comunidad/{id}/post")
-    public ArrayList<Post> getPostByComunityId(long comunityId){
-        return votacionService.getPostByComunityId(comunityId); 
+    public ArrayList<Post> getPostBycomunityCode(String comunityCode){
+        return postService.getPostBycomunityCode(comunityCode); 
     }
 }

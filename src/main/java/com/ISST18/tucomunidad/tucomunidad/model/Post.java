@@ -20,7 +20,7 @@ public class Post {
     @Column
     private long autorId;
     @Column
-    private long comunidadId;
+    private String comunityCode;
     @Column
     public int upvoted;
     @Column
@@ -31,12 +31,12 @@ public class Post {
         String titulo,
         String cuerpo,
         long autorId,
-        long comunidadId
+        String comunityCode
     ) {
         this.titulo = titulo;
         this.cuerpo = cuerpo;
         this.autorId = autorId;
-        this.comunidadId = comunidadId;
+        this.comunityCode = comunityCode;
         this.upvoted = 0;
         this.respuestas = new ArrayList<>();
     }
@@ -73,12 +73,12 @@ public class Post {
         this.autorId = autorId;
     }
 
-    public long getComunidadId() {
-        return this.comunidadId;
+    public String getcomunityCode() {
+        return this.comunityCode;
     }
 
-    public void setComunidadId(long comunidadId) {
-        this.comunidadId = comunidadId;
+    public void setcomunityCode(String comunityCode) {
+        this.comunityCode = comunityCode;
     }
 
     public int getUpvoted() {
