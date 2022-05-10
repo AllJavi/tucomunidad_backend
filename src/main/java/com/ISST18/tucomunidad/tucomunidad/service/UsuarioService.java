@@ -23,7 +23,9 @@ public class UsuarioService {
             "Perez Garcia", 
             "p.pgarcia@alumnos.upm.com",
             "1234", 
-            "2A"
+            "2A",
+            1,
+            "1957"
             );
         
         Usuario u2 = new Usuario(
@@ -31,7 +33,9 @@ public class UsuarioService {
             "Rodriguez Laranjo", 
             "m.rmunoz@alumnos.upm.com",
             "1234", 
-            "1A"
+            "1A",
+            0,
+            "1957"
             );
         
         Usuario u3 = new Usuario(
@@ -39,7 +43,9 @@ public class UsuarioService {
             "De la Fuente Garcia", 
             "c.fgarcia@alumnos.upm.com",
             "1234", 
-            "1B"
+            "1B",
+            0,
+            "1957"
             );
         
         Usuario u4 = new Usuario(
@@ -47,7 +53,9 @@ public class UsuarioService {
             "Perez Lopez", 
             "m.plopez@alumnos.upm.com",
             "1234", 
-            "2B"
+            "2B",
+            0,
+            "1957"
             );
         
         Usuario u5 = new Usuario(
@@ -55,7 +63,9 @@ public class UsuarioService {
             "Sanchez Jones", 
             "m.sjones@alumnos.upm.com",
             "1234", 
-            "3"
+            "3",
+            0,
+            "1957"
             );
         
 
@@ -64,10 +74,11 @@ public class UsuarioService {
             "Perez Rodriguez", 
             "a.prodriguez@alumnos.upm.com",
             "1234", 
-            "-1"
+            "-1",
+            0,
+            "1957"
             );
-        
-                        
+                                
         usuarioRepository.save(u1);
         usuarioRepository.save(u2);
         usuarioRepository.save(u3);

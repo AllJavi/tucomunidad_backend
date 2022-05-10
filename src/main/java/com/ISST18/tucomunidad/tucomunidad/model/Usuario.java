@@ -34,6 +34,7 @@ public class Usuario {
     public Usuario() {
     }
 
+       
     public Usuario(
             String nombre,
             String apellidos,
@@ -64,6 +65,24 @@ public class Usuario {
         this.piso = piso;
         this.rol = rol;
         this.comunidades = new ArrayList<>();
+    }
+
+    public Usuario(String nombre,
+            String apellidos,
+            String email,
+            String password,
+            String piso,
+            int rol,
+            String comunityCode) {
+
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.password = password;
+        this.piso = piso;
+        this.rol = rol;
+        this.comunidades = new ArrayList<>();
+        this.comunidades.add(comunityCode);
     }
 
     public Long getId() {
