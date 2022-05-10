@@ -1,6 +1,10 @@
 package com.ISST18.tucomunidad.tucomunidad.controller;
 
+import org.aspectj.lang.annotation.control.CodeGenerationHint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,70 +16,46 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import com.ISST18.tucomunidad.tucomunidad.model.Gestor;
+import com.ISST18.tucomunidad.tucomunidad.service.GestorService;
 
 @RestController
 public class GestorController {
-    
-    private ArrayList<Gestor> gestores;
-
-    public GestorController() {
-        this.gestores = new ArrayList<>();
-        Gestor u1 = new Gestor(
-            "Ivan", 
-            "Perez Broskis", 
-            "i.pbroskis@alumnos.upm.es",
-            "1234", 
-            "000000"
-            );
-        this.gestores.add(u1);
-        Gestor u2 = new Gestor(
-            "Justin", 
-            "Drowzee Broskis", 
-            "i.pbroskis@alumnos.upm.es",
-            "1234", 
-            "000001"
-            );
-        this.gestores.add(u2);
-                
-    }
-
-    private Gestor findByEmail(String email) {
-        for (Gestor gestor: this.gestores) 
-            if (gestor.getEmail().compareTo(email) == 0) return gestor;
-        return null;
-    }
+    @Autowired
+    GestorService gestorService;
 
     @RequestMapping(path = "api/v1/gestor")
     @ResponseBody
     public ArrayList<Gestor> showAll() {
-        return this.gestores;
+        return gestorService.getAllGestors();
     }
     
     @CrossOrigin
-    @RequestMapping(path = "api/v1/gestor/login")
+    @GetMapping(path = "api/v1/gestor/login")
     @ResponseBody
     public Gestor login(@RequestParam String email, @RequestParam String numAdmin, @RequestParam String password) {
-        Gestor gestor = findByEmail(email);
-        if (!Objects.nonNull(gestor)) return null;
-        if (!(gestor.getNumAdmin().compareTo(numAdmin) == 0)) return null;
-        if (!(gestor.getPassword().compareTo(password) == 0)) return null;
-        return gestor;
+       return gestorService.login(email, numAdmin, password); 
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/gestor/register")
     public boolean register(@RequestBody Gestor gestor) {
-        this.gestores.add(gestor);
-        return true;
+        return gestorService.register(gestor);
+    }
+
+    @GetMapping(path = "api/v1/gestor/load")
+    public void seedGestor() {
+        gestorService.seedGestores();
+    }
+    @CrossOrigin
+    @GetMapping(path = "api/v1/gestor/{email}")
+    public Gestor getGestorById(@PathVariable String email) {
+        return gestorService.checkExist(email);
     }
 
     @CrossOrigin
-    @PostMapping(path = "api/v1/gestor/registerComunity")
-    public boolean addComunity(@RequestParam String ComunityCode, @RequestParam String email){
-        Gestor gestor = findByEmail(email);
-        gestor.addComunidad(ComunityCode);
-        return true;
+    @PostMapping(path = "api/v1/gestor/comunidad")
+    public Gestor addComunidad(@RequestParam String email, @RequestParam String comunidad) {
+        return gestorService.addComunidad(email, comunidad);
     }
-   
 
 }

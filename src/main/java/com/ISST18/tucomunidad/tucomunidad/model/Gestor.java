@@ -3,6 +3,7 @@ package com.ISST18.tucomunidad.tucomunidad.model;
 
     
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -30,7 +31,7 @@ public class Gestor {
     @Column
     private String numAdmin;
     @Column
-    private ArrayList<String> comunidades;
+    private String[] comunidades;
 
     public Gestor() {
     }
@@ -47,7 +48,7 @@ public class Gestor {
         this.email = email;
         this.password = password;
         this.numAdmin= numAdmin;
-        this.comunidades= new ArrayList<>();
+        this.comunidades= new String[100]; 
         
     }
 
@@ -99,16 +100,15 @@ public class Gestor {
         this.numAdmin = numAdmin;
     }
 
-    public ArrayList<String> getComunidades() {
+    public String[] getComunidades() {
         return this.comunidades;
     }
 
-    public void setComunidades(ArrayList<String> comunidades) {
+    public void setComunidades(String[] comunidades) {
         this.comunidades = comunidades;
     }
-
-    public void addComunidad(String comunityCode) {
-        this.comunidades.add(comunityCode);
+    public void addComunidad(String ComunityCode, int i) {
+        this.comunidades[i] = ComunityCode;
     }
 
     @Override
