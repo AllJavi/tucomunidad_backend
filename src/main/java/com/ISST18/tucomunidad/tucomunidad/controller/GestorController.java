@@ -67,17 +67,7 @@ public class GestorController {
         if (gestor == null) {
             return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
         }
-        String gestorStr;
-        JSONObject json = new JSONObject();
-        json.put("nombre", gestor.getNombre());
-        json.put("apellidos", gestor.getApellidos());
-        json.put("email", gestor.getEmail());
-        json.put("numAdmin", gestor.getNumAdmin());
-        json.put("password", gestor.getPassword());
-        json.put("comunidades", gestor.getComunidades());
-
-        gestorStr = json.toString();
-        return ResponseEntity.ok().body(gestorStr);
+        return ResponseEntity.ok().body(gestor.toString2());
     }
 
     @CrossOrigin
