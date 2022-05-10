@@ -14,9 +14,9 @@ public class VotacionService {
     VotacionRepository votacionRepository;
 
     public ArrayList<Votacion> getAllVotacion() {
-        ArrayList<Votacion> instalaciones = new ArrayList<Votacion>();
-        votacionRepository.findAll().forEach(instalacion -> instalaciones.add(instalacion));
-        return instalaciones;
+        ArrayList<Votacion> votaciones = new ArrayList<Votacion>();
+        votacionRepository.findAll().forEach(instalacion -> votaciones.add(instalacion));
+        return votaciones;
     }
 
     public Votacion getVotacionById(Long id) {

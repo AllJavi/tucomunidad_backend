@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Table
 public class Votacion {
 
-    @Id
     @GeneratedValue
+    @Id
     @Column
     private Long id;
     @Column
@@ -44,11 +44,12 @@ public class Votacion {
       
         this.titulo = titulo;
         this.opcionA = opcionA;
-        this.votantesA = new ArrayList<>();
         this.opcionB = opcionB;
-        this.votantesB = new ArrayList<>();
         this.autorId = autorId;
         this.comunityCode = comunityCode;
+        this.votantesA = new ArrayList<>();
+        this.votantesB = new ArrayList<>();
+                
     }
 
     public Long getId() {
@@ -80,7 +81,7 @@ public class Votacion {
     }
 
     public void setOpcionB(String opcionB) {
-        this.opcionA = opcionB;
+        this.opcionB = opcionB;
     }
 
     public int getAutor() {

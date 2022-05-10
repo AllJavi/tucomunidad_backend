@@ -33,6 +33,8 @@ public class VotacionController {
     @CrossOrigin
     @PostMapping("api/v1/votacion/")
     public void newVotacion(@RequestBody Votacion votacion) {
+        System.out.println(votacion.getOpcionA());
+        System.out.println(votacion.getOpcionB());
         votacionService.newVotacion(votacion);
     }
 
