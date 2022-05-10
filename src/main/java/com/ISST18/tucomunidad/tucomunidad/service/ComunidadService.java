@@ -43,11 +43,11 @@ public class ComunidadService {
         return Comunidades;
     }
 
-    public Comunidad getComunidadById(long id) {
+    public Comunidad getComunidadById(Long id) {
         return comunidadRepository.findById(id).get();
     }
 
-    public void delete(long id) {
+    public void delete(Long id) {
         comunidadRepository.deleteById(id);
     }
 

@@ -19,7 +19,7 @@ public class Reserva {
     @Column
     private int horaFin;
     @Column
-    private long userId;
+    private int userId;
     @Column
     public String comunityCode;
     @Column
@@ -30,7 +30,7 @@ public class Reserva {
     public Reserva(
         int horaInicio,
         int horaFin,
-        long userId,
+        int userId,
         String comunityCode,
         Long instalacionId
     ) {
@@ -65,11 +65,11 @@ public class Reserva {
         this.horaFin = horaFin;
     }
 
-    public long getUsuario() {
+    public int getUsuario() {
         return this.userId;
     }
 
-    public void setUsuario(long userId) {
+    public void setUsuario(int userId) {
         this.userId = userId;
     }
 

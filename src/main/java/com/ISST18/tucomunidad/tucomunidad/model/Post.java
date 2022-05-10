@@ -18,7 +18,7 @@ public class Post {
     @Column
     private String cuerpo;
     @Column
-    private long autorId;
+    private int autorId;
     @Column
     private String comunityCode;
     @Column
@@ -30,7 +30,7 @@ public class Post {
     public Post(
         String titulo,
         String cuerpo,
-        long autorId,
+        int autorId,
         String comunityCode
     ) {
         this.titulo = titulo;
@@ -65,11 +65,11 @@ public class Post {
         this.cuerpo = cuerpo;
     }
 
-    public long getAutor() {
+    public int getAutor() {
         return this.autorId;
     }
 
-    public void setAutor(long autorId) {
+    public void setAutor(int autorId) {
         this.autorId = autorId;
     }
 

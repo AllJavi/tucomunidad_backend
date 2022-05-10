@@ -42,7 +42,7 @@ public class GestorService {
         return Gestors;
     }
 
-    public Gestor getGestorById(long id) {
+    public Gestor getGestorById(Long id) {
         return gestorRepository.findById(id).get();
     }
 
@@ -69,7 +69,7 @@ public class GestorService {
         return true;
     }
 
-    public boolean deleteUser(long id) {
+    public boolean deleteUser(Long id) {
         gestorRepository.deleteById(id);
         return true;
     }

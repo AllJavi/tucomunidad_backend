@@ -93,7 +93,7 @@ public class UsuarioService {
         return Usuarios;
     }
 
-    public Usuario getUsuarioById(long id) {
+    public Usuario getUsuarioById(Long id) {
         return usuarioRepository.findById(id).get();
     }
 
@@ -118,7 +118,7 @@ public class UsuarioService {
         return true;
     }
 
-    public boolean deleteUser(long id) {
+    public boolean deleteUser(Long id) {
         usuarioRepository.deleteById(id);
         return true;
     }

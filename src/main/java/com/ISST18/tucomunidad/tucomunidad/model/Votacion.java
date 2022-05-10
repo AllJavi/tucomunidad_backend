@@ -27,7 +27,7 @@ public class Votacion {
     @Column
     private ArrayList<Usuario> votantesB;
     @Column
-    private long autorId;
+    private int autorId;
 
     public Votacion() {
     }
@@ -36,7 +36,7 @@ public class Votacion {
         String titulo,
         String opcionA,
         String opcionB,
-        long autorId
+        int autorId
     ) {
       
         this.titulo = titulo;
@@ -79,11 +79,11 @@ public class Votacion {
         this.opcionA = opcionB;
     }
 
-    public long getAutor() {
+    public int getAutor() {
         return this.autorId;
     }
 
-    public void setAutor(long autorId) {
+    public void setAutor(int autorId) {
         this.autorId = autorId;
     }
 
