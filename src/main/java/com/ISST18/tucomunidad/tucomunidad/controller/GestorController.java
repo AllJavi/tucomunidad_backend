@@ -74,18 +74,7 @@ public class GestorController {
     @PostMapping(path = "api/v1/gestor/comunidad")
     public ResponseEntity<String> addComunidad(@RequestParam String email, @RequestParam String comunidad) {
         Gestor gestor = gestorService.addComunidad(email, comunidad);
-
-        String gestorStr;
-        JSONObject json = new JSONObject();
-        json.put("nombre", gestor.getNombre());
-        json.put("apellidos", gestor.getApellidos());
-        json.put("email", gestor.getEmail());
-        json.put("numAdmin", gestor.getNumAdmin());
-        json.put("password", gestor.getPassword());
-        json.put("comunidades", gestor.getComunidades());
-        gestorStr = json.toString();
-
-        return ResponseEntity.ok().body(gestorStr);
+        return ResponseEntity.ok().body(gestor.toString2());
 
     }
 
