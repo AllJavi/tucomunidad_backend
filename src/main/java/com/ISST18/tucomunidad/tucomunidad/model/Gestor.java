@@ -2,10 +2,6 @@ package com.ISST18.tucomunidad.tucomunidad.model;
 
 
     
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

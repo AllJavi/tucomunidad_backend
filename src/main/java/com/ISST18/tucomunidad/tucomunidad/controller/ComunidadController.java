@@ -45,9 +45,17 @@ public class ComunidadController {
     }
 
     @CrossOrigin
-    @PostMapping(path = "api/v1/comunidad/register")
-    public String register(@RequestBody Comunidad comunidad) {
-        return comunidadService.register(comunidad);
+    @PostMapping(path = "api/v1/comunidad/register/{gestor}")
+    public String register(@RequestBody Comunidad comunidad, @PathVariable String gestor) {
+        Comunidad newComunidad = new Comunidad(
+        gestor,
+        comunidad.getCalle(), 
+        comunidad.getNumero(),
+        comunidad.getCPostal(),
+        comunidad.getComunityCode()
+        );
+        
+        return comunidadService.register(newComunidad);
     }
 
     @CrossOrigin
