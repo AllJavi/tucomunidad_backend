@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.minidev.json.JSONObject;
+
 @Entity
 @Table
 public class Usuario {
@@ -83,6 +85,21 @@ public class Usuario {
         this.rol = rol;
         this.comunidades = new ArrayList<>();
         this.comunidades.add(comunityCode);
+    }
+
+    public String toString2(){
+        String usuarioStr;
+        JSONObject json = new JSONObject();
+        json.put("nombre", this.getNombre());
+        json.put("apellidos", this.getApellidos());
+        json.put("email", this.getEmail());
+        json.put("password", this.getPassword());
+        json.put("piso", this.getPiso());
+        json.put("rol", this.getRol());
+        json.put("comunidades", this.getComunidades());
+               
+        usuarioStr = json.toString();
+        return usuarioStr;
     }
 
     public Long getId() {

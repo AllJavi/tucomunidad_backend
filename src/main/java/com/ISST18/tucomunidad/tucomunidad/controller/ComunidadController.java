@@ -1,6 +1,8 @@
 package com.ISST18.tucomunidad.tucomunidad.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.minidev.json.JSONObject;
 
 import com.ISST18.tucomunidad.tucomunidad.model.Comunidad;
 import com.ISST18.tucomunidad.tucomunidad.model.Post;
@@ -36,34 +37,29 @@ public class ComunidadController {
     @CrossOrigin
     @GetMapping("api/v1/comunidad")
     @ResponseBody
-    public ArrayList<Comunidad> showAll() {
-        return comunidadService.getAllComunidades();
+    public ResponseEntity<ArrayList<String>> showAll() {
+        ArrayList<String> comStr = new ArrayList<String>();
+        for (Comunidad com : comunidadService.getAllComunidades()){
+            comStr.add(com.toString());
+        }
+        return ResponseEntity.ok().body(comStr); 
     }
     
     @CrossOrigin
     @GetMapping("api/v1/comunidad/{comunityCode}")
-    public String findByComunityCode(@PathVariable String comunityCode) {
+    public ResponseEntity<String> findByComunityCode(@PathVariable String comunityCode) {
         Comunidad comunidad = comunidadService.findByComunityCode(comunityCode);
-        String comunidadStr;
-        JSONObject json = new JSONObject();
-        json.put("gestorCode", comunidad.getGestor());
-        json.put("calle", comunidad.getCalle());
-        json.put("numero", comunidad.getNumero());
-        json.put("cpostal", comunidad.getCPostal());
-        json.put("comunityCode", comunidad.getComunityCode());
-        json.put("posts", comunidad.getPosts());
-        json.put("votaciones", comunidad.getVotaciones());
-        json.put("instalaciones", comunidad.getInstalaciones());
-        json.put("reuniones", comunidad.getReuniones());
 
-        comunidadStr = json.toString();
-        return comunidadStr;
+        if (comunidad == null){
+            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok().body(comunidad.toString());
         
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/register/{gestor}")
-    public String register(@RequestBody Comunidad comunidad, @PathVariable String gestor) {
+    public ResponseEntity<String> register(@RequestBody Comunidad comunidad, @PathVariable String gestor) {
         Comunidad newComunidad = new Comunidad(
         gestor,
         comunidad.getCalle(), 
@@ -71,84 +67,87 @@ public class ComunidadController {
         comunidad.getCPostal(),
         comunidad.getComunityCode()
         );
-        
-        return comunidadService.register(newComunidad);
+
+        return ResponseEntity.ok().body(comunidadService.register(newComunidad));
     }
+
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/post/delete")
-    public boolean deletePost(@PathVariable String comunityCode, @RequestBody Long id) {
+    public ResponseEntity<Boolean> deletePost(@PathVariable String comunityCode, @RequestBody Long id) {
         Comunidad comunidad = comunidadService.findByComunityCode(comunityCode);
         comunidad.removePost(id);
-        return true;
+        return ResponseEntity.ok().body(true);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/{parentPost}/post")
-    public boolean newSubPost(@PathVariable String comunityCode, @PathVariable Long parentPost,
+    public ResponseEntity<Boolean> newSubPost(@PathVariable String comunityCode, @PathVariable Long parentPost,
             @RequestBody Post post) {
         Comunidad comunidad = comunidadService.findByComunityCode(comunityCode);
         Post parent = comunidad.getPost(parentPost);
         parent.newSubPost(post);
-        return true;
+        return ResponseEntity.ok().body(true);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/votacion")
-    public boolean newVotacion(@PathVariable String comunityCode, @RequestBody Votacion votacion) {
+    public ResponseEntity<Boolean> newVotacion(@PathVariable String comunityCode, @RequestBody Votacion votacion) {
         Comunidad comunidad = comunidadService.findByComunityCode(comunityCode);
         comunidad.addVotacion(votacion);
-        return true;
+        return ResponseEntity.ok().body(true);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/votacion/delete")
-    public boolean deleteVotacion(@PathVariable String comunityCode, @RequestBody Long id) {
+    public ResponseEntity<Boolean> deleteVotacion(@PathVariable String comunityCode, @RequestBody Long id) {
         Comunidad comunidad = comunidadService.findByComunityCode(comunityCode);
         comunidad.removeVotacion(id);
-        return true;
+        return ResponseEntity.ok().body(true);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/{idInstalacion}/")
-    public boolean addReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
+    public ResponseEntity<Boolean> addReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
             @RequestBody Reserva reserva) {
         Comunidad comunidad = comunidadService.findByComunityCode(comunityCode);
         int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
+
         if (instalacionIndex == -1)
-            return false;
+            return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
+
         comunidad.getInstalaciones().get(instalacionIndex).addReserva(reserva);
 
-        return true;
+        return ResponseEntity.ok().body(true);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/{idInstalacion}/delete")
-    public boolean deleteReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
+    public ResponseEntity<Boolean> deleteReserva(@PathVariable String comunityCode, @PathVariable Long idInstalacion,
             @RequestBody Long id) {
         Comunidad comunidad = comunidadService.findByComunityCode(comunityCode);
         int instalacionIndex = comunidad.findByInstalacionId(idInstalacion);
         if (instalacionIndex == -1)
-            return false;
+            return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
         comunidad.getInstalaciones().get(instalacionIndex).removeReserva(id);
 
-        return true;
+        return ResponseEntity.ok().body(true);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/reunion")
-    public boolean newReunion(@PathVariable String comunityCode, @RequestBody Reunion reunion) {
+    public ResponseEntity<Boolean> newReunion(@PathVariable String comunityCode, @RequestBody Reunion reunion) {
         Comunidad comunidad = comunidadService.findByComunityCode(comunityCode);
         comunidad.addReunion(reunion);
-        return true;
+        return ResponseEntity.ok().body(true);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/comunidad/{comunityCode}/reunion/delete")
-    public boolean deleteReunion(@PathVariable String comunityCode, @RequestBody Long id) {
+    public ResponseEntity<Boolean> deleteReunion(@PathVariable String comunityCode, @RequestBody Long id) {
         Comunidad comunidad = comunidadService.findByComunityCode(comunityCode);
         comunidad.removeReunion(id);
-        return true;
+        return ResponseEntity.ok().body(true);
     }
 
 }

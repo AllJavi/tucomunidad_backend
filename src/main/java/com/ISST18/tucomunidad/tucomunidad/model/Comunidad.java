@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;  
 import javax.persistence.Table;
 
+import net.minidev.json.JSONObject;
+
 @Entity
 @Table
 
@@ -55,6 +57,26 @@ public class Comunidad {
         this.reuniones = new ArrayList<>();
     }
 
+    
+
+    @Override
+    public String toString() {
+        String comunidadStr;
+        JSONObject json = new JSONObject();
+        json.put("gestorCode", this.getGestor());
+        json.put("calle", this.getCalle());
+        json.put("numero", this.getNumero());
+        json.put("cpostal", this.getCPostal());
+        json.put("comunityCode", this.getComunityCode());
+        json.put("posts", this.getPosts());
+        json.put("votaciones", this.getVotaciones());
+        json.put("instalaciones", this.getInstalaciones());
+        json.put("reuniones", this.getReuniones());
+
+        comunidadStr = json.toString();
+        return comunidadStr;
+    }
+    
     public Long getid() {
         return this.id;
     }

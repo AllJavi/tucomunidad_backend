@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.minidev.json.JSONObject;
+
 @Entity
 @Table
 public class Votacion {
@@ -51,6 +53,21 @@ public class Votacion {
         this.comunityCode = comunityCode;
     }
 
+    @Override
+    public String toString() {
+        String votStr;
+        JSONObject json = new JSONObject();
+        json.put("titulo", this.getTitulo());
+        json.put("opcionA", this.getOpcionA());
+        json.put("opcionB", this.getOpcionB());
+        json.put("autorId", this.getAutor());
+        json.put("comunityCode", this.getComunityCode());
+
+        votStr = json.toString();
+
+        return votStr;
+    }
+
     public Long getId() {
         return this.id;
     }
@@ -80,7 +97,7 @@ public class Votacion {
     }
 
     public void setOpcionB(String opcionB) {
-        this.opcionA = opcionB;
+        this.opcionB = opcionB;
     }
 
     public int getAutor() {

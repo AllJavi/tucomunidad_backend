@@ -6,6 +6,7 @@ import com.ISST18.tucomunidad.tucomunidad.model.Post;
 import com.ISST18.tucomunidad.tucomunidad.service.PostService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,11 +25,14 @@ public class PostController {
     public ArrayList<Post> getAllPost() {
         return postService.getAllPost();
     }
+
     @CrossOrigin
     @GetMapping("api/v1/post({id}")
-    public Post getPostById(@PathVariable Long id) {
-        return postService.getPostById(id);
+    public ResponseEntity<String> getPostById(@PathVariable Long id) {
+        Post post = postService.getPostById(id);
+        return ResponseEntity.ok().body(post.toString());
     }
+
     @CrossOrigin
     @PostMapping("api/v1/post/")
     public void newPost(@RequestBody Post post) {
@@ -43,17 +47,24 @@ public class PostController {
 
     @CrossOrigin
     @PostMapping(path = "api/v1/post")
-    public int upVotedPost(@RequestParam Long postId) {
-        return postService.upVotedPost(postId);
+    public ResponseEntity<Integer> upVotedPost(@RequestParam Long postId) {
+        return ResponseEntity.ok().body(postService.upVotedPost(postId));
+        
     }
+
     @CrossOrigin
     @PostMapping(path = "api/v1/post/{id}/")
     public boolean newSubPost(@PathVariable Long parentPostId, @RequestBody Post post) {
         return postService.newSubPost(parentPostId, post);
     }
+
     @CrossOrigin
     @GetMapping(path = "api/v1/comunidad/{id}/post")
-    public ArrayList<Post> getPostBycomunityCode(String comunityCode){
-        return postService.getPostBycomunityCode(comunityCode); 
+    public ResponseEntity<ArrayList<String>> getPostBycomunityCode(String comunityCode){
+        ArrayList<String> postsStr = new ArrayList<String>();
+        for (Post post : postService.getPostBycomunityCode(comunityCode)){
+            postsStr.add(post.toString());
+        }
+        return ResponseEntity.ok().body(postsStr); 
     }
 }

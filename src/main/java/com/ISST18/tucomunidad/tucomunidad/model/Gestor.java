@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.minidev.json.JSONObject;
+
 @Entity
 @Table
 public class Gestor {
@@ -47,6 +49,20 @@ public class Gestor {
         this.comunidades= new String[100]; 
         
     }
+
+    public String toString2() {
+        String gestorStr;
+        JSONObject json = new JSONObject();
+        json.put("nombre", this.getNombre());
+        json.put("apellidos", this.getApellidos());
+        json.put("email", this.getEmail());
+        json.put("numAdmin", this.getNumAdmin());
+        json.put("password", this.getPassword());
+        json.put("comunidades", this.getComunidades());
+
+        gestorStr = json.toString();
+        return gestorStr;
+    } 
 
     public Long getId() {
         return this.id;

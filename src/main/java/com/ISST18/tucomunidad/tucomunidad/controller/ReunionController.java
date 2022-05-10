@@ -6,6 +6,7 @@ import com.ISST18.tucomunidad.tucomunidad.model.Reunion;
 import com.ISST18.tucomunidad.tucomunidad.service.ReunionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,14 +21,18 @@ public class ReunionController {
 
     @CrossOrigin
     @GetMapping("api/v1/reunion")
-    public ArrayList<Reunion> getAllReunion() {
-        return votacionService.getAllReunion();
+    public ResponseEntity<ArrayList<String>> showAll() {
+        ArrayList<String> reunionStr = new ArrayList<String>();
+        for (Reunion reunion : votacionService.getAllReunion()){
+            reunionStr.add(reunion.toString());
+        }
+        return ResponseEntity.ok().body(reunionStr); 
     }
 
     @CrossOrigin
     @GetMapping("reunion/{id}")
-    public Reunion getReunionById(@PathVariable Long id) {
-        return votacionService.getReunionById(id);
+    public ResponseEntity<String> getReunionById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(votacionService.getReunionById(id).toString());
     }
 
     @CrossOrigin

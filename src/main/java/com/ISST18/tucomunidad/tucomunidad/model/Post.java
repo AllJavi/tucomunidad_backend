@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.minidev.json.JSONObject;
+
 @Entity
 @Table
 public class Post {
@@ -44,6 +46,30 @@ public class Post {
         this.respuestas = new ArrayList<>();
     }
 
+    
+
+    @Override
+    public String toString() {
+        String postStr;
+        JSONObject json = new JSONObject();
+        json.put("titulo", this.getTitulo());
+        json.put("cuerpo", this.getCuerpo());
+        json.put("autorId", this.getAutor());
+        json.put("comunityCode", this.getcomunityCode());
+        json.put("upvoted", this.getUpvoted());
+
+        ArrayList<String> respuestas = new ArrayList<String>();
+        for (Post post : this.getSubPost()){
+           respuestas.add(post.toString());
+        }
+
+        json.put("Respuestas", respuestas);
+
+        postStr = json.toString();
+
+        return postStr;
+    }
+    
     public Long getId() {
         return this.id;
     }

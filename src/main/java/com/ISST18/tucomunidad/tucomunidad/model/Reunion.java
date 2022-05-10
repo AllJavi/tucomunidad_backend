@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.minidev.json.JSONObject;
+
 @Entity
 @Table
 public class Reunion {
@@ -39,6 +41,21 @@ public class Reunion {
         this.presencial = presencial;
         this.localizacion = localizacion;
         this.comunityCode = comunityCode;
+    }
+
+    @Override
+    public String toString() {
+        String resStr;
+        JSONObject json = new JSONObject();
+        json.put("motivo", this.getMotivo());
+        json.put("fecha", this.getFecha());
+        json.put("presencial", this.getPresencial());
+        json.put("localizacion", this.getLocalizacion());
+        json.put("comunityCode", this.getComunityCode());
+
+        resStr = json.toString();
+
+        return resStr;
     }
 
     public Long getId() {

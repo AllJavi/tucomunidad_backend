@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.minidev.json.JSONObject;
+
 @Entity
 @Table
 public class Instalacion {
@@ -54,7 +56,23 @@ public class Instalacion {
         this.comunityCode = comunityCode;
     }
 
-        
+    @Override
+    public String toString() {
+        String instalacionStr;
+        JSONObject json = new JSONObject();
+        json.put("nombre", this.getNombre());
+        json.put("url", this.getUrl());
+        json.put("horaInicio", this.getHoraInicio());
+        json.put("horaFin", this.getHoraFin());
+        json.put("intervalo", this.getIntervalo());
+        json.put("reservas", this.getReservas());
+        json.put("precio", this.getPrecio());
+        json.put("comunityCode", this.getComunityCode());
+
+        instalacionStr = json.toString();
+        return instalacionStr;
+    }
+
     public Long getId() {
         return this.id;
     }

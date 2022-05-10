@@ -6,6 +6,7 @@ import com.ISST18.tucomunidad.tucomunidad.model.Votacion;
 import com.ISST18.tucomunidad.tucomunidad.service.VotacionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,14 +21,18 @@ public class VotacionController {
 
     @CrossOrigin
     @GetMapping("api/v1/votacion")
-    public ArrayList<Votacion> getAllVotacion() {
-        return votacionService.getAllVotacion();
+    public ResponseEntity<ArrayList<String>> showAll() {
+        ArrayList<String> votStr = new ArrayList<String>();
+        for (Votacion vot : votacionService.getAllVotacion()){
+            votStr.add(vot.toString());
+        }
+        return ResponseEntity.ok().body(votStr); 
     }
 
     @CrossOrigin
     @GetMapping("api/v1/votacion/{id}")
-    public Votacion getVotacionById(@PathVariable Long id) {
-        return votacionService.getVotacionById(id);
+    public ResponseEntity<String> getVotacionById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(votacionService.getVotacionById(id).toString());
     }
 
     @CrossOrigin

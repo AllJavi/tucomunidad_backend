@@ -1,6 +1,7 @@
 package com.ISST18.tucomunidad.tucomunidad.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import net.minidev.json.JSONObject;
 
 import java.util.ArrayList;
-
 
 import com.ISST18.tucomunidad.tucomunidad.model.Gestor;
 import com.ISST18.tucomunidad.tucomunidad.service.GestorService;
@@ -28,23 +27,32 @@ public class GestorController {
 
     @RequestMapping(path = "api/v1/gestor")
     @ResponseBody
-    public ArrayList<Gestor> showAll() {
-        return gestorService.getAllGestors();
+    public ResponseEntity<ArrayList<String>> showAll() {
+        ArrayList<String> gestStr = new ArrayList<String>();
+        for (Gestor gest : gestorService.getAllGestors()){
+            gestStr.add(gest.toString());
+        }
+        return ResponseEntity.ok().body(gestStr); 
     }
+
 
     @CrossOrigin
     @GetMapping(path = "api/v1/gestor/login")
     @ResponseBody
-    public ResponseEntity<Gestor> login(@RequestParam String email, @RequestParam String numAdmin,
+    public ResponseEntity<String> login(@RequestParam String email, @RequestParam String numAdmin,
             @RequestParam String password) throws Exception {
         Gestor gestor = gestorService.login(email, numAdmin, password);
-        return ResponseEntity.ok().body(gestor);
+        if (gestor == null) {
+            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        }
+        
+        return ResponseEntity.ok().body(gestor.toString2());
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/gestor/register")
-    public boolean register(@RequestBody Gestor gestor) {
-        return gestorService.register(gestor);
+    public ResponseEntity<Boolean> register(@RequestBody Gestor gestor) {
+        return ResponseEntity.ok().body(gestorService.register(gestor));
     }
 
     @GetMapping(path = "api/v1/gestor/load")
@@ -54,8 +62,11 @@ public class GestorController {
 
     @CrossOrigin
     @GetMapping(path = "api/v1/gestor/{email}")
-    public String getGestorById(@PathVariable String email) {
+    public ResponseEntity<String> getGestorById(@PathVariable String email) {
         Gestor gestor = gestorService.checkExist(email);
+        if (gestor == null) {
+            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        }
         String gestorStr;
         JSONObject json = new JSONObject();
         json.put("nombre", gestor.getNombre());
@@ -66,13 +77,26 @@ public class GestorController {
         json.put("comunidades", gestor.getComunidades());
 
         gestorStr = json.toString();
-        return gestorStr;
+        return ResponseEntity.ok().body(gestorStr);
     }
 
     @CrossOrigin
     @PostMapping(path = "api/v1/gestor/comunidad")
-    public Gestor addComunidad(@RequestParam String email, @RequestParam String comunidad) {
-        return gestorService.addComunidad(email, comunidad);
+    public ResponseEntity<String> addComunidad(@RequestParam String email, @RequestParam String comunidad) {
+        Gestor gestor = gestorService.addComunidad(email, comunidad);
+
+        String gestorStr;
+        JSONObject json = new JSONObject();
+        json.put("nombre", gestor.getNombre());
+        json.put("apellidos", gestor.getApellidos());
+        json.put("email", gestor.getEmail());
+        json.put("numAdmin", gestor.getNumAdmin());
+        json.put("password", gestor.getPassword());
+        json.put("comunidades", gestor.getComunidades());
+        gestorStr = json.toString();
+
+        return ResponseEntity.ok().body(gestorStr);
+
     }
 
 }

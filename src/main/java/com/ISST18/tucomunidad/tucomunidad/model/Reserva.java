@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.minidev.json.JSONObject;
+
 @Entity
 @Table
 public class Reserva {
@@ -39,6 +41,21 @@ public class Reserva {
         this.userId = userId;
         this.comunityCode = comunityCode;
         this.instalacionId = instalacionId;
+    }
+
+    @Override
+    public String toString() {
+        String resStr;
+        JSONObject json = new JSONObject();
+        json.put("horaInicio", this.getHoraInicio());
+        json.put("horaFin", this.getHoraFin());
+        json.put("userId", this.getUsuario());
+        json.put("comunityCode", this.getcomunityCode());
+        json.put("instalacionId", this.getInstalacionId());
+
+        resStr = json.toString();
+
+        return resStr;
     }
 
     public Long getId() {
