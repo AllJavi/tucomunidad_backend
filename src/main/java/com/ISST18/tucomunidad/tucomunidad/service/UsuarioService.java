@@ -108,7 +108,6 @@ public class UsuarioService {
     public Usuario login(String email, String password) {
         Usuario user = findByEmail(email);
         if (!Objects.nonNull(user)) return null;
-
         if (!(user.getPassword().compareTo(password) == 0)) return null;
         return user;
     

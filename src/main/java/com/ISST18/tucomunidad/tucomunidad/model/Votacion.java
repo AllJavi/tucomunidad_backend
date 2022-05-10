@@ -28,6 +28,8 @@ public class Votacion {
     private ArrayList<Usuario> votantesB;
     @Column
     private int autorId;
+    @Column
+    private String comunityCode;
 
     public Votacion() {
     }
@@ -36,7 +38,8 @@ public class Votacion {
         String titulo,
         String opcionA,
         String opcionB,
-        int autorId
+        int autorId,
+        String comunityCode
     ) {
       
         this.titulo = titulo;
@@ -45,6 +48,7 @@ public class Votacion {
         this.opcionB = opcionB;
         this.votantesB = new ArrayList<>();
         this.autorId = autorId;
+        this.comunityCode = comunityCode;
     }
 
     public Long getId() {
@@ -93,5 +97,13 @@ public class Votacion {
 
     public void addOpcionB(Usuario votedUser) {
         this.votantesB.add(votedUser);
+    }
+
+    public String getComunityCode() {
+        return this.comunityCode;
+    }
+
+    public void setComunityCode(String comunityCode) {
+        this.comunityCode = comunityCode;
     }
 }

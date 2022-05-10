@@ -1,6 +1,7 @@
 package com.ISST18.tucomunidad.tucomunidad.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import net.minidev.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -43,13 +46,22 @@ public class UsuarioController {
     @CrossOrigin
     @GetMapping("api/v1/usuario/login")
     @ResponseBody
-    public Usuario login(@RequestParam String email, @RequestParam String password) {
-        // Usuario user = findByEmail(email);
-        // if (!Objects.nonNull(user)) return null;
-
-        // if (!(user.getPassword().compareTo(password) == 0)) return null;
-        // return user;
-        return usuarioService.login(email, password);
+    public ResponseEntity<String> login(@RequestParam String email, @RequestParam String password) {
+        
+        Usuario usuario =  usuarioService.login(email, password);
+        String usuarioStr;
+        JSONObject json = new JSONObject();
+        json.put("nombre", usuario.getNombre());
+        json.put("apellidos", usuario.getApellidos());
+        json.put("email", usuario.getEmail());
+        json.put("password", usuario.getPassword());
+        json.put("piso", usuario.getPiso());
+        json.put("rol", usuario.getRol());
+        json.put("comunidades", usuario.getComunidades());
+               
+        usuarioStr = json.toString();
+        return ResponseEntity.ok().body(usuarioStr);
+                
     }
 
     @CrossOrigin

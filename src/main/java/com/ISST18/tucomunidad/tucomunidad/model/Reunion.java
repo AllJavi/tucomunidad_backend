@@ -22,6 +22,8 @@ public class Reunion {
     private boolean presencial;
     @Column
     private String localizacion;
+    @Column
+    private String comunityCode;
 
     public Reunion() {
     }
@@ -29,12 +31,14 @@ public class Reunion {
         String motivo, 
         String fecha,
         boolean presencial,
-        String localizacion
+        String localizacion,
+        String comunityCode
     ) {
         this.motivo = motivo;
         this.fecha = fecha;
         this.presencial = presencial;
         this.localizacion = localizacion;
+        this.comunityCode = comunityCode;
     }
 
     public Long getId() {
@@ -75,6 +79,14 @@ public class Reunion {
 
     public void setLocalizacion(String localizacion) {
         this.localizacion = localizacion;
+    }
+
+    public String getComunityCode() {
+        return this.comunityCode;
+    }
+
+    public void setComunityCode(String comunityCode) {
+        this.comunityCode = comunityCode;
     }
 
 }
