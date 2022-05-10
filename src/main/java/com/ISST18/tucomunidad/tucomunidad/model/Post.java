@@ -28,7 +28,8 @@ public class Post {
     @Column
     private ArrayList<Post> respuestas;
     
-
+    public Post() {
+    }
     public Post(
         String titulo,
         String cuerpo,
