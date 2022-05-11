@@ -30,7 +30,7 @@ public class InstalacionService {
                 "https://sportglobal.es/wp-content/uploads/2019/05/instalacion-pista-padel.jpg",
                 1000,
                 2200,
-                50,
+                100,
                 5,
                 "1957");
         
@@ -57,6 +57,6 @@ public class InstalacionService {
     }
 
     public void reservarHora(){
-        
+
     }
 }

@@ -22,13 +22,13 @@ public class ComunidadService {
                 "1957");
         Comunidad c2 = new Comunidad(
                 "000000",
-                "Av. Complutense",
+                "Av. Castellana",
                 31,
                 "28040",
                 "1958");
         Comunidad c3 = new Comunidad(
                 "000000",
-                "Av. Complutense",
+                "C. Ratones",
                 32,
                 "28040",
                 "1959");
