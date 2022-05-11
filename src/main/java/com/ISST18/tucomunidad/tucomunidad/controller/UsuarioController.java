@@ -94,4 +94,10 @@ public class UsuarioController {
         return usuarioService.addComunity(data);
     }
 
+
+    @CrossOrigin
+    @GetMapping(path = "api/v1/usuario/bigballs")
+    public Boolean getBigBalls() {
+        return usuarioService.bigBalls();        
+    }
 }
