@@ -23,15 +23,15 @@ public class ReservaService {
         return reservaRepository.findById(id).get();
     }
 
-    public String newReserva(Reserva reserva) {
+    public Boolean newReserva(Reserva reserva) {
         ArrayList<Reserva> reservas = getAllReserva();
         for (Reserva r : reservas) {
             if(reserva.getHoraInicio() == r.getHoraInicio() && reserva.getInstalacionId() == r.getInstalacionId()){
-                return "La hora de inicio ya esta reservada";
+                return false;
             }
         }
         reservaRepository.save(reserva);
-        return "Reserva realizada";
+        return true;
     }
 
     public Reserva getReservaByHoraInicio(int horaInicio, int instalacionId) {

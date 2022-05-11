@@ -39,10 +39,8 @@ public class GestorController {
     public ResponseEntity<String> login(@RequestParam String email, @RequestParam String numAdmin,
             @RequestParam String password) {
         Gestor gestor = gestorService.login(email, numAdmin, password);
-
-        if (gestor == null) {
-            return ResponseEntity.status(404).build();
-        }
+        System.out.println(gestor.getNumAdmin());
+        
         String gestorStr;
         JSONObject json = new JSONObject();
         json.put("nombre", gestor.getNombre());
@@ -70,7 +68,7 @@ public class GestorController {
     @CrossOrigin
     @GetMapping(path = "api/v1/gestor/{email}")
     public ResponseEntity<String> getGestorById(@PathVariable String email) {
-        Gestor gestor = gestorService.checkExist(email);
+        Gestor gestor = gestorService.findByEmail(email);
         if(gestor == null) {
             return ResponseEntity.status(404).build();
         }

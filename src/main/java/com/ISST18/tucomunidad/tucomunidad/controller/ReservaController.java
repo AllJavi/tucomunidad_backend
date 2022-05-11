@@ -31,8 +31,8 @@ public class ReservaController {
 
     @CrossOrigin
     @PostMapping("api/v1/reserva/")
-    public void newReserva(@RequestBody Reserva reserva) {
-        votacionService.newReserva(reserva);
+    public Boolean newReserva(@RequestBody Reserva reserva) {
+        return votacionService.newReserva(reserva);
     }
     @CrossOrigin
     @GetMapping("api/v1/reserva/delete/{id}")

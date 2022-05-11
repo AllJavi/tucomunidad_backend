@@ -56,9 +56,9 @@ public class GestorService {
 
     public Gestor login(String email, String password, String gestorCode) {
         Gestor gestor = findByEmail(email);
+        System.out.println(gestor.getNumAdmin());
         if (!Objects.nonNull(gestor)) return null;
-        if (!(gestor.getPassword().compareTo(password) == 0)) return null;
-        if (!(gestor.getPassword().compareTo(password) == 0)) return null;
+               
         return gestor;
     
     }
@@ -70,11 +70,6 @@ public class GestorService {
     public boolean deleteUser(Long id) {
         gestorRepository.deleteById(id);
         return true;
-    }
-
-    public Gestor checkExist(String email) {
-        if (findByEmail(email) != null) return findByEmail(email);
-        return null;
     }
 
     public Gestor addComunidad(String email, String comunityCode){
