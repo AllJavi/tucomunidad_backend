@@ -55,4 +55,8 @@ public class InstalacionService {
     public void delete(Long id) {
         instalacionRepository.deleteById(id);
     }
+
+    public void reservarHora(){
+        
+    }
 }

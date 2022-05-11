@@ -1,6 +1,7 @@
 package com.ISST18.tucomunidad.tucomunidad.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +36,24 @@ public class GestorController {
     @CrossOrigin
     @GetMapping(path = "api/v1/gestor/login")
     @ResponseBody
-    public ResponseEntity<Gestor> login(@RequestParam String email, @RequestParam String numAdmin,
-            @RequestParam String password) throws Exception {
+    public ResponseEntity<String> login(@RequestParam String email, @RequestParam String numAdmin,
+            @RequestParam String password) {
         Gestor gestor = gestorService.login(email, numAdmin, password);
-        return ResponseEntity.ok().body(gestor);
+
+        if (gestor == null) {
+            return ResponseEntity.status(404).build();
+        }
+        String gestorStr;
+        JSONObject json = new JSONObject();
+        json.put("nombre", gestor.getNombre());
+        json.put("apellidos", gestor.getApellidos());
+        json.put("email", gestor.getEmail());
+        json.put("password", gestor.getPassword());
+        json.put("numAdmin", gestor.getNumAdmin());
+        json.put("comunidades", gestor.getComunidades());
+
+        gestorStr = json.toString();
+        return ResponseEntity.ok().body(gestorStr);
     }
 
     @CrossOrigin
@@ -54,19 +69,22 @@ public class GestorController {
 
     @CrossOrigin
     @GetMapping(path = "api/v1/gestor/{email}")
-    public String getGestorById(@PathVariable String email) {
+    public ResponseEntity<String> getGestorById(@PathVariable String email) {
         Gestor gestor = gestorService.checkExist(email);
+        if(gestor == null) {
+            return ResponseEntity.status(404).build();
+        }
         String gestorStr;
         JSONObject json = new JSONObject();
         json.put("nombre", gestor.getNombre());
         json.put("apellidos", gestor.getApellidos());
         json.put("email", gestor.getEmail());
-        json.put("numAdmin", gestor.getNumAdmin());
         json.put("password", gestor.getPassword());
+        json.put("numAdmin", gestor.getNumAdmin());
         json.put("comunidades", gestor.getComunidades());
 
         gestorStr = json.toString();
-        return gestorStr;
+        return ResponseEntity.ok().body(gestorStr);
     }
 
     @CrossOrigin

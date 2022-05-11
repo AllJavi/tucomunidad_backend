@@ -39,4 +39,18 @@ public class ReservaController {
     public void delete(@PathVariable Long id) {
         votacionService.delete(id);
     }
+
+    @CrossOrigin
+    @GetMapping("api/v1/reserva/{horaInicio}")
+    public Reserva getReservaByHoraInicio(int horaInicio) {
+        ArrayList<Reserva> reservas = getAllReserva();
+        for (Reserva r : reservas) {
+            if(r.getHoraInicio() == horaInicio){
+                return r;
+            }
+        }
+        return null;
+    }
+
+   
 }

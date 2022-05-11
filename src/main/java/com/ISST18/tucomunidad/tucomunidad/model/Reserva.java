@@ -27,6 +27,13 @@ public class Reserva {
 
     public Reserva() {
     }
+
+    public Reserva(int horaInicio,String comunityCode, Long instalacionId, int userId) {
+        this.userId = userId;
+        this.horaInicio = horaInicio;
+        this.comunityCode = comunityCode;
+        this.instalacionId = instalacionId;
+    }
     public Reserva(
         int horaInicio,
         int horaFin,

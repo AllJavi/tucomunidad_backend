@@ -53,6 +53,7 @@ public class UsuarioController {
         Usuario usuario =  usuarioService.login(email, password);
         String usuarioStr;
         JSONObject json = new JSONObject();
+        json.put("id", usuario.getId());
         json.put("nombre", usuario.getNombre());
         json.put("apellidos", usuario.getApellidos());
         json.put("email", usuario.getEmail());

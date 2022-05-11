@@ -126,6 +126,7 @@ public class UsuarioService {
         Usuario user = login(data.email, data.password);
         if (Objects.nonNull(user))
             user.addComunidad(data.comunitycode);
+            usuarioRepository.save(user);
         return true;
     }
 }
