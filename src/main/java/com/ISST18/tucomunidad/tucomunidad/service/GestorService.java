@@ -76,7 +76,7 @@ public class GestorService {
         Gestor gestor = new Gestor();
         if (findByEmail(email) != null) gestor = findByEmail(email);
         for (int i = 0; i < gestor.getComunidades().length; i++) {
-            if (gestor.getComunidades()[i] == null || gestor.getComunidades() == null) {
+            if (gestor.getComunidades()[i] == null ) {
                 gestor.addComunidad(comunityCode, i);
             }
         }
