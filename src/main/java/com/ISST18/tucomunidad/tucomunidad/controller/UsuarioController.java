@@ -24,10 +24,12 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
     
+    @CrossOrigin
     @GetMapping("api/v1/usuario/load")
     public void seedUsers(){
         usuarioService.seedUsers();
     }
+    @CrossOrigin
     @GetMapping("/usuario/{id}") 
     private Usuario findByEmail(@PathVariable("id") String email) {
         // for (Usuario user: this.usuarios) 
@@ -35,7 +37,7 @@ public class UsuarioController {
         // return null;
         return usuarioService.findByEmail(email);
     }
-
+    @CrossOrigin
     @GetMapping("api/v1/usuario")
     @ResponseBody
     public ArrayList<Usuario> getAllUsuarios() {
